@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,63 +81,84 @@ public class LoginActivity extends AppCompatActivity {
                     + URLEncoder.encode(pass, "UTF-8");
 
             //Poner la peticion http aqui
-            JSONObject json = doLogin(data);
+            AsyncLogin asyncLogin = new AsyncLogin();
+            asyncLogin.execute(data);
+        }
+    }
+
+    private class AsyncLogin extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... data) {
+            BufferedReader reader=null;
+
+            try {
+                URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/login.php");
+
+                // Send POST data request
+
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                String d = "";
+                for (int i = 0; i < data.length; ++i) d += data[i];
+                wr.write( d );
+                wr.flush();
+                Log.d("data", d);
+
+                // Get the server response
+
+                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                // Read Server Response
+                while((line = reader.readLine()) != null)
+                {
+                    // Append server response in string
+                    sb.append(line + "\n");
+                }
+
+                String jsonString = sb.toString();
+                Log.d("result", jsonString);
+                return jsonString;
+            }
+            catch(Exception ex) {
+                Toast t = Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT);
+                t.show();
+            }
+            finally
+            {
+                try
+                {
+                    reader.close();
+                }
+
+                catch(Exception ex) {
+                    Toast t = Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
             Toast t = null;
-            if (json == null)
+            if (result == null)
                 t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
-            else if (json.getBoolean("correct"))
+            else if (result.contains("true"))
                 t = Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT);
-            else if (!json.getBoolean("correct"))
+            else if (!result.contains("false"))
                 t = Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT);
             else
                 t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
             t.show();
+
+            super.onPostExecute(result);
         }
-    }
-
-    public static JSONObject doLogin(String data) throws IOException, JSONException {
-
-        BufferedReader reader=null;
-
-        try {
-            URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/login.php");
-
-            // Send POST data request
-
-            URLConnection conn = url.openConnection();
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write( data );
-            wr.flush();
-
-            // Get the server response
-
-            reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-
-            // Read Server Response
-            while((line = reader.readLine()) != null)
-            {
-                // Append server response in string
-                sb.append(line + "\n");
-            }
-
-            String jsonString = sb.toString();
-            System.out.print("JSON: " + jsonString);
-            return new JSONObject(jsonString);
-        }
-        catch(Exception ex) {}
-        finally
-        {
-            try
-            {
-                reader.close();
-            }
-
-            catch(Exception ex) {}
-        }
-        return null;
     }
 }
 
