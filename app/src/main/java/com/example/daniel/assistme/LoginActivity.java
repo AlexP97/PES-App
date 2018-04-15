@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                 t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
             else if (result.contains("true"))
                 t = Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT);
-            else if (!result.contains("false"))
+            else if (result.contains("false"))
                 t = Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT);
             else
                 t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
