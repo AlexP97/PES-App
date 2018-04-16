@@ -1,8 +1,10 @@
 package com.example.daniel.assistme;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -90,17 +92,8 @@ public class RegisterActivity extends AppCompatActivity {
                             + URLEncoder.encode(country, "UTF-8");
 
                     //Poner la peticion http aqui
-                    JSONObject json = doRegister(data);
-                    Toast t = null;
-                    if (json == null)
-                        t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
-                    else if (json.getBoolean("correct"))
-                        t = Toast.makeText(getApplicationContext(), "Register successful", Toast.LENGTH_SHORT);
-                    else if (!json.getBoolean("correct"))
-                        t = Toast.makeText(getApplicationContext(), "Register failed", Toast.LENGTH_SHORT);
-                    else
-                        t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
-                    t.show();
+                    AsyncRegister asyncRegister = new AsyncRegister();
+                    asyncRegister.execute(data);
                 }
                 else {
                     Toast t = Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT);
@@ -110,48 +103,77 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public static JSONObject doRegister(String data) throws IOException, JSONException {
+    private class AsyncRegister extends AsyncTask<String, Void, String> {
 
-        BufferedReader reader=null;
 
-        try {
-            URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/register.php");
+        @Override
+        protected String doInBackground(String... data) {
+            BufferedReader reader=null;
 
-            // Send POST data request
+            try {
+                URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/register.php");
 
-            URLConnection conn = url.openConnection();
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write( data );
-            wr.flush();
+                // Send POST data request
 
-            // Get the server response
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                String d = "";
+                for (int i = 0; i < data.length; ++i) d += data[i];
+                wr.write( d );
+                wr.flush();
+                Log.d("data", d);
 
-            reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            StringBuilder sb = new StringBuilder();
-            String line = null;
+                // Get the server response
 
-            // Read Server Response
-            while((line = reader.readLine()) != null)
-            {
-                // Append server response in string
-                sb.append(line + "\n");
+                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                // Read Server Response
+                while((line = reader.readLine()) != null)
+                {
+                    // Append server response in string
+                    sb.append(line + "\n");
+                }
+
+                String jsonString = sb.toString();
+                Log.d("result", jsonString);
+                return jsonString;
             }
+            catch(Exception ex) {
 
-            String jsonString = sb.toString();
-            return new JSONObject(jsonString);
-        }
-        catch(Exception ex) {}
-        finally
-        {
-            try
-            {
-                reader.close();
             }
+            finally
+            {
+                try
+                {
+                    reader.close();
+                }
 
-            catch(Exception ex) {}
+                catch(Exception ex) {
+
+                }
+            }
+            return null;
         }
-        return null;
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            Toast t = null;
+            if (result == null)
+                t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
+            else if (result.contains("true"))
+                t = Toast.makeText(getApplicationContext(), "Register successful", Toast.LENGTH_SHORT);
+            else if (result.contains("false"))
+                t = Toast.makeText(getApplicationContext(), "Register failed", Toast.LENGTH_SHORT);
+            else
+                t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
+            t.show();
+
+            super.onPostExecute(result);
+        }
     }
 }
 

@@ -125,8 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                 return jsonString;
             }
             catch(Exception ex) {
-                Toast t = Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT);
-                t.show();
+
             }
             finally
             {
@@ -136,8 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 catch(Exception ex) {
-                    Toast t = Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT);
-                    t.show();
+
                 }
             }
             return null;
