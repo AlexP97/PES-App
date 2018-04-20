@@ -121,19 +121,6 @@
                 android:text="Register"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/social_worker"
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:background="#00000000"
-                android:onClick="RegisterButton"
-                android:text="Are you a social worker?"
-                android:textStyle="bold" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
