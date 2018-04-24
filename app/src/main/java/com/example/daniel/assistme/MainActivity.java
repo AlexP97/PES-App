@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public void Guest(View view){
 
         Intent intent = new Intent(this, MenuActivity.class);
+        intent.putExtra("EXTRA_SESSION_ID", "");
         startActivity(intent);
     }
 }

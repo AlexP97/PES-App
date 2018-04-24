@@ -3,6 +3,8 @@ package com.example.daniel.assistme;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -48,13 +50,17 @@ import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
-/**
- * A login screen that offers login via email/password.
- */
+
 public class LoginActivity extends AppCompatActivity {
+
+    String username;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        context = getApplicationContext();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
@@ -62,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     public void LoginButton (View view) throws IOException, JSONException {
 
         EditText usernameEdit = (EditText) findViewById(R.id.username);
-        String username = usernameEdit.getText().toString();
+        username = usernameEdit.getText().toString();
 
         EditText passEdit = (EditText) findViewById(R.id.password);
         String pass = passEdit.getText().toString();
@@ -145,18 +151,30 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
 
             Toast t = null;
-            if (result == null)
+            if (result == null) {
                 t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
-            else if (result.contains("true"))
-                t = Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT);
-            else if (result.contains("false"))
+                t.show();
+            }
+            else if (result.contains("true")) {
+                ChangeScene();
+            }
+            else if (result.contains("false")) {
                 t = Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT);
-            else
+                t.show();
+            }
+            else {
                 t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
-            t.show();
+                t.show();
+            }
 
             super.onPostExecute(result);
         }
+    }
+
+    void ChangeScene() {
+        Intent intent = new Intent(context, MenuActivity.class);
+        intent.putExtra("EXTRA_SESSION_ID", username);
+        startActivity(intent);
     }
 }
 

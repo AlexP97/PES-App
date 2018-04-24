@@ -1,6 +1,7 @@
 package com.example.daniel.assistme;
 
 public class User {
+    private String username;
     private String name;
     private String surname;
     private String mail;
@@ -15,6 +16,14 @@ public class User {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String userN) {
+        this.username = userN;
     }
 
     public String getSurname() {

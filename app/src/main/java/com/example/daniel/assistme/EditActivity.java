@@ -1,6 +1,5 @@
 package com.example.daniel.assistme;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -22,24 +21,21 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-public class RegisterActivity extends AppCompatActivity {
+
+public class EditActivity extends AppCompatActivity {
 
     String username;
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        context = getApplicationContext();
+        username = getIntent().getStringExtra("EXTRA_SESSION_ID");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_edit);
     }
 
-    public void RegisterButton(View view) throws IOException, JSONException {
-
-        EditText usernameEdit = (EditText) findViewById(R.id.username);
-        username = usernameEdit.getText().toString();
+    public void EditButton(View view) throws IOException, JSONException {
 
         EditText nameEdit = (EditText) findViewById(R.id.name);
         String name = nameEdit.getText().toString();
@@ -59,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText countryEdit = (EditText) findViewById(R.id.country);
         String country = countryEdit.getText().toString();
 
-        if (username.equals("") || name.equals("") || surname.equals("") || email.equals("") ||
+        if (name.equals("") || surname.equals("") || email.equals("") ||
                 pass.equals("") || passRep.equals("") || country.equals("")){
 
             Toast t = Toast.makeText(getApplicationContext(), "Some fields are empty", Toast.LENGTH_SHORT);
@@ -95,8 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
                             + URLEncoder.encode(country, "UTF-8");
 
                     //Poner la peticion http aqui
-                    AsyncRegister asyncRegister = new AsyncRegister();
-                    asyncRegister.execute(data);
+                    AsyncEdit asyncEdit = new AsyncEdit();
+                    asyncEdit.execute(data);
                 }
                 else {
                     Toast t = Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT);
@@ -106,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private class AsyncRegister extends AsyncTask<String, Void, String> {
+    private class AsyncEdit extends AsyncTask<String, Void, String> {
 
 
         @Override
@@ -114,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
             BufferedReader reader=null;
 
             try {
-                URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/register.php");
+                URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/edit_profile.php");
 
                 // Send POST data request
 
@@ -141,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 String jsonString = sb.toString();
-                Log.d("result", jsonString);
+                Log.d("correct", jsonString);
                 return jsonString;
             }
             catch(Exception ex) {
@@ -165,30 +161,22 @@ public class RegisterActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
 
             Toast t = null;
-            if (result == null) {
+            if (result == null)
                 t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
-                t.show();
+            else if (result.contains("true")) {
+                t = Toast.makeText(getApplicationContext(), "Edition successful", Toast.LENGTH_SHORT);
+                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                intent.putExtra("EXTRA_SESSION_ID", username);
+                startActivity(intent);
             }
-            else if (result.contains("true")){
-                ChangeScene();
-            }
-            else if (result.contains("false")) {
-                t = Toast.makeText(getApplicationContext(), "Register failed", Toast.LENGTH_SHORT);
-                t.show();
-            }
-            else {
+            else if (result.contains("false"))
+                t = Toast.makeText(getApplicationContext(), "Edition failed", Toast.LENGTH_SHORT);
+            else
                 t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
-                t.show();
-            }
+            t.show();
 
             super.onPostExecute(result);
         }
-    }
-
-    void ChangeScene() {
-        Intent intent = new Intent(context, MenuActivity.class);
-        intent.putExtra("EXTRA_SESSION_ID", username);
-        startActivity(intent);
     }
 }
 
