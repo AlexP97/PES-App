@@ -44,11 +44,11 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
+            android:label="Log in"
             android:screenOrientation="portrait" />
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/title_activity_register"
+            android:label="Sign up"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MenuActivity"
