@@ -118,7 +118,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/register_button"
                 android:onClick="RegisterButton"
-                android:text="Register"
+                android:text="Sign up"
                 android:textStyle="bold" />
 
         </LinearLayout>
