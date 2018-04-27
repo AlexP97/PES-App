@@ -4,14 +4,149 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MenuActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
+        android:id="@+id/menu"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:popupTheme="@style/Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
-    />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/menu_row_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingBottom="130dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/guides_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="298dp"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:onClick="GuidesButton"
+                    android:paddingTop="10dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/guias_icono" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:contentDescription="guides"
+                    android:text="GUIDES"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorLink="?android:attr/colorForeground"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform"
+                    tools:text="GUIDES" />
+
+                <ImageButton
+                    android:id="@+id/forumButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="298dp"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:onClick="ForumButton"
+                    android:paddingTop="10dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/foro_icono" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:autoText="false"
+                    android:contentDescription="guides"
+                    android:text="FORUM"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorLink="?android:attr/colorForeground"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform"
+                    tools:text="FORUM" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/chat_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="298dp"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:onClick="ChatButton"
+                    android:paddingTop="10dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/chat_icono" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:autoText="false"
+                    android:contentDescription="guides"
+                    android:text="CHAT"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorLink="?android:attr/colorForeground"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform"
+                    tools:text="CHAT" />
+
+                <ImageButton
+                    android:id="@+id/news_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="298dp"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:onClick="NewsButton"
+                    android:paddingTop="10dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/noticias_icono" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:autoText="false"
+                    android:contentDescription="guides"
+                    android:text="NEWS"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_dark"
+                    android:textColorLink="?android:attr/colorForeground"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:autoSizeTextType="uniform"
+                    tools:text="NEWS" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

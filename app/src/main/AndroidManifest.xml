@@ -54,7 +54,7 @@
             android:name=".MenuActivity"
             android:label="AssistMe"
             android:screenOrientation="portrait"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffff" />
         <activity android:name=".EditActivity"></activity>
     </application>
 
