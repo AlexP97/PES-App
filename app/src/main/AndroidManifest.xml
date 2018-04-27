@@ -55,7 +55,13 @@
             android:label="AssistMe"
             android:screenOrientation="portrait"
             android:textColor="#ffffff" />
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".EditActivity"
+            android:label= "Edit Profile"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".GuidesActivity"
+            android:label="Guides"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
