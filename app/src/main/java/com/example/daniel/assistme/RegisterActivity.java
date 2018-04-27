@@ -24,7 +24,7 @@ import java.net.URLEncoder;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    String username;
+    User userData;
     Context context;
 
     @Override
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void RegisterButton(View view) throws IOException, JSONException {
 
         EditText usernameEdit = (EditText) findViewById(R.id.username);
-        username = usernameEdit.getText().toString();
+        String username = usernameEdit.getText().toString();
 
         EditText nameEdit = (EditText) findViewById(R.id.name);
         String name = nameEdit.getText().toString();
@@ -93,6 +93,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     data += "&" + URLEncoder.encode("country", "UTF-8") + "="
                             + URLEncoder.encode(country, "UTF-8");
+
+                    userData = new User(username, pass, email, name, surname, country);
 
                     //Poner la peticion http aqui
                     AsyncRegister asyncRegister = new AsyncRegister();
@@ -187,7 +189,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     void ChangeScene() {
         Intent intent = new Intent(context, MenuActivity.class);
-        intent.putExtra("EXTRA_SESSION_ID", username);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("userData", userData);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

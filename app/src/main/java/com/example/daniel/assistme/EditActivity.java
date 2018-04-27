@@ -20,19 +20,36 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 
 public class EditActivity extends AppCompatActivity {
 
-    String username;
+    User userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        username = getIntent().getStringExtra("EXTRA_SESSION_ID");
+        Bundle bundle = getIntent().getExtras();
+        userData = (User)bundle.getSerializable("userData");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        EditText nameEdit = (EditText) findViewById(R.id.name);
+        nameEdit.setText(userData.getName());
+
+        EditText surnameEdit = (EditText) findViewById(R.id.surname);
+        surnameEdit.setText(userData.getSurname());
+
+        EditText emailEdit = (EditText) findViewById(R.id.email);
+        emailEdit.setText(userData.getMail());
+
+        EditText passEdit = (EditText) findViewById(R.id.password);
+        passEdit.setText(userData.getPassword());
+
+        EditText countryEdit = (EditText) findViewById(R.id.country);
+        countryEdit.setText(userData.getCountry());
     }
 
     public void EditButton(View view) throws IOException, JSONException {
@@ -73,7 +90,7 @@ public class EditActivity extends AppCompatActivity {
                 if (email.contains("@")) {
 
                     String data = URLEncoder.encode("username", "UTF-8")
-                            + "=" + URLEncoder.encode(username, "UTF-8");
+                            + "=" + URLEncoder.encode(userData.getUsername(), "UTF-8");
 
                     data += "&" + URLEncoder.encode("user_password", "UTF-8") + "="
                             + URLEncoder.encode(pass, "UTF-8");
@@ -166,7 +183,9 @@ public class EditActivity extends AppCompatActivity {
             else if (result.contains("true")) {
                 t = Toast.makeText(getApplicationContext(), "Edition successful", Toast.LENGTH_SHORT);
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                intent.putExtra("EXTRA_SESSION_ID", username);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("userData", userData);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
             else if (result.contains("false"))

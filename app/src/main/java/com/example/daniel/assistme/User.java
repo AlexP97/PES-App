@@ -1,14 +1,27 @@
 package com.example.daniel.assistme;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String username;
     private String name;
     private String surname;
     private String mail;
     private String password;
+    private String country;
 
-    public User(){
-        super();
+    public User(String user, String pass, String mail, String name, String surn, String coun){
+        this.username = user;
+        this.password = pass;
+        this.mail = mail;
+        this.name = name;
+        this.surname = surn;
+        this.country = coun;
+    }
+
+    public User(String user, String pass){
+        this.username = user;
+        this.password = pass;
     }
 
     public String getName() {
@@ -38,6 +51,13 @@ public class User {
     }
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getPassword() {

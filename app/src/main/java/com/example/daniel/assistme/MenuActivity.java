@@ -10,12 +10,14 @@ import android.view.View;
 
 public class MenuActivity extends AppCompatActivity {
 
-    String username;
     Context context;
+    User userData;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        username = getIntent().getStringExtra("EXTRA_SESSION_ID");
+        Bundle bundle = getIntent().getExtras();
+        userData = (User)bundle.getSerializable("userData");
         context = getApplicationContext();
 
         super.onCreate(savedInstanceState);
@@ -35,7 +37,9 @@ public class MenuActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.account_settings:
                 Intent intent = new Intent(this, EditActivity.class);
-                intent.putExtra("EXTRA_SESSION_ID", username);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("userData", userData);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
         }

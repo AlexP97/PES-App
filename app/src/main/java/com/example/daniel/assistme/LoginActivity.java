@@ -53,7 +53,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends AppCompatActivity {
 
-    String username;
+    User userData;
     Context context;
 
     @Override
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     public void LoginButton (View view) throws IOException, JSONException {
 
         EditText usernameEdit = (EditText) findViewById(R.id.username);
-        username = usernameEdit.getText().toString();
+        String username = usernameEdit.getText().toString();
 
         EditText passEdit = (EditText) findViewById(R.id.password);
         String pass = passEdit.getText().toString();
@@ -85,6 +85,8 @@ public class LoginActivity extends AppCompatActivity {
 
             data += "&" + URLEncoder.encode("password", "UTF-8") + "="
                     + URLEncoder.encode(pass, "UTF-8");
+
+            userData = new User(username, pass);
 
             //Poner la peticion http aqui
             AsyncLogin asyncLogin = new AsyncLogin();
@@ -173,7 +175,9 @@ public class LoginActivity extends AppCompatActivity {
 
     void ChangeScene() {
         Intent intent = new Intent(context, MenuActivity.class);
-        intent.putExtra("EXTRA_SESSION_ID", username);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("userData", userData);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }
