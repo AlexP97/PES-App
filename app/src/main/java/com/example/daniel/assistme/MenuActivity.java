@@ -42,6 +42,13 @@ public class MenuActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
+            case R.id.app_settings:
+                Intent intent2 = new Intent(this, SettingsActivity.class);
+                Bundle bundle2 = new Bundle();
+                bundle2.putSerializable("userData", userData);
+                intent2.putExtras(bundle2);
+                startActivity(intent2);
+                break;
         }
         return true;
     }

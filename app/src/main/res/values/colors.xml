@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#1a5e86</color>
     <color name="colorPrimaryDark">#1a5e86</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#029AB5</color>
+    <color name="switchTrail">#B8DEDD</color>
     <color name="colorBlack">#000000</color>
 </resources>

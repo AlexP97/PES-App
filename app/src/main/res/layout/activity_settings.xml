@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".SettingsActivity">
 
     <TextView
@@ -14,18 +15,23 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:text="Language"
+        android:textColor="#1A5E86"
         android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/underline" />
 
     <LinearLayout
+        android:id="@+id/LanguageButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:onClick="LanguageOptions"
         android:orientation="vertical">
 
         <TextView
@@ -34,13 +40,70 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Change app language"
+            android:textColor="@color/colorBlack"
             android:textSize="22sp" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Changes the language of the text shown on the screen" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/SystemSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="30dp"
+        android:text="System"
+        android:textColor="#1A5E86"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/underline" />
+
+    <LinearLayout
+        android:id="@+id/NotificationsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch1"
+            style="@style/Switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:paddingTop="10dp"
+            android:text="Show notifications"
+            android:textColorLink="@android:color/holo_blue_dark"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="ToggleNotifications"
+            android:text="Choose either you want the app to show push\nnotifications or not" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/darker_gray" />
 
 </LinearLayout>
