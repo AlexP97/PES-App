@@ -172,6 +172,7 @@ public class RegisterActivity extends AppCompatActivity {
                 t.show();
             }
             else if (result.contains("true")){
+                MainActivity.setSharedPreferences(userData);
                 ChangeScene();
             }
             else if (result.contains("false")) {

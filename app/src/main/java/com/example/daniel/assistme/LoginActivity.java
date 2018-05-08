@@ -1,54 +1,23 @@
 package com.example.daniel.assistme;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -62,10 +31,24 @@ public class LoginActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         super.onCreate(savedInstanceState);
+        checkSession();
         setContentView(R.layout.activity_login);
     }
 
-    public void LoginButton (View view) throws IOException, JSONException {
+    private void checkSession(){
+        String username = MainActivity.sharedPreferences.getString("Username", null);
+        String password = MainActivity.sharedPreferences.getString("Password", null);
+        if (username != null && password != null){
+            try {
+                login(username, password);
+            } catch (UnsupportedEncodingException e) {
+                Toast t = Toast.makeText(getApplicationContext(), "Error desconocido", Toast.LENGTH_SHORT);
+                t.show();
+            }
+        }
+    }
+
+    public void LoginButton (View view) throws IOException {
 
         EditText usernameEdit = (EditText) findViewById(R.id.username);
         String username = usernameEdit.getText().toString();
@@ -79,19 +62,22 @@ public class LoginActivity extends AppCompatActivity {
             t.show();
         }
         else {
-
-            String data = URLEncoder.encode("username", "UTF-8")
-                    + "=" + URLEncoder.encode(username, "UTF-8");
-
-            data += "&" + URLEncoder.encode("password", "UTF-8") + "="
-                    + URLEncoder.encode(pass, "UTF-8");
-
-            userData = new User(username, pass);
-
-            //Poner la peticion http aqui
-            AsyncLogin asyncLogin = new AsyncLogin();
-            asyncLogin.execute(data);
+            login(username, pass);
         }
+    }
+
+    public void login(String username, String pass) throws UnsupportedEncodingException {
+        String data = URLEncoder.encode("username", "UTF-8")
+                + "=" + URLEncoder.encode(username, "UTF-8");
+
+        data += "&" + URLEncoder.encode("password", "UTF-8") + "="
+                + URLEncoder.encode(pass, "UTF-8");
+
+        userData = new User(username, pass);
+
+        //Poner la peticion http aqui
+        AsyncLogin asyncLogin = new AsyncLogin();
+        asyncLogin.execute(data);
     }
 
     private class AsyncLogin extends AsyncTask<String, Void, String> {
@@ -158,6 +144,7 @@ public class LoginActivity extends AppCompatActivity {
                 t.show();
             }
             else if (result.contains("true")) {
+                MainActivity.setSharedPreferences(userData);
                 ChangeScene();
             }
             else if (result.contains("false")) {
