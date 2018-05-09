@@ -69,7 +69,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void NewsButton(View view) {
-        Intent intent = new Intent(context, EditActivity.class);
+        Intent intent = new Intent(context, NewsActivity.class);
         startActivity(intent);
     }
 }
