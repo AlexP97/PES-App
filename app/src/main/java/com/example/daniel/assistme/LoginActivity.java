@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -149,7 +150,46 @@ public class LoginActivity extends AppCompatActivity {
                     t.show();
                 } else if (result.contains("true")) {
                     MainActivity.setSharedPreferences(userData);
-                    GetUserData();
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            try {
+                                // Create URL
+                                URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/user.php");
+
+                                // Create connection
+                                HttpURLConnection myConnection =
+                                        (HttpURLConnection) url.openConnection();
+
+                                InputStream responseBody = myConnection.getInputStream();
+
+                                InputStreamReader responseBodyReader =
+                                        new InputStreamReader(responseBody, "UTF-8");
+
+                                JsonReader jsonReader = new JsonReader(responseBodyReader);
+
+                                jsonReader.beginObject(); // Start processing the JSON object
+                                while (jsonReader.hasNext()) { // Loop through all keys
+                                    String key = jsonReader.nextName(); // Fetch the next key
+
+                                    String value = jsonReader.nextString();
+                                    // Do something with the value
+                                    Log.d(key, value);
+                                }
+
+                                jsonReader.close();
+
+                                myConnection.disconnect();
+
+                                ChangeScene();
+                            }
+                            catch(Exception e){
+                                Log.d("error", e.toString());
+                            }
+
+                        }
+                    });
                 } else if (result.contains("false")) {
                     t = Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT);
                     t.show();
@@ -163,48 +203,6 @@ public class LoginActivity extends AppCompatActivity {
             catch(Exception e){}
         }
 
-    }
-
-    void GetUserData() {
-
-        try {
-            // Create URL
-            URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/login.php");
-
-            // Create connection
-            HttpsURLConnection myConnection =
-                    (HttpsURLConnection) url.openConnection();
-
-            InputStream responseBody = myConnection.getInputStream();
-
-            InputStreamReader responseBodyReader =
-                    new InputStreamReader(responseBody, "UTF-8");
-
-            JsonReader jsonReader = new JsonReader(responseBodyReader);
-
-            jsonReader.beginObject(); // Start processing the JSON object
-            while (jsonReader.hasNext()) { // Loop through all keys
-                String key = jsonReader.nextName(); // Fetch the next key
-                if (key.equals("userData")) { // Check if desired key
-                    // Fetch the value as a String
-                    String value = jsonReader.nextString();
-
-                    // Do something with the value
-                    Log.d("userData", value);
-
-                    break; // Break out of the loop
-                } else {
-                    jsonReader.skipValue(); // Skip values of other keys
-                }
-            }
-
-            jsonReader.close();
-
-            myConnection.disconnect();
-
-            ChangeScene();
-        }
-        catch(Exception e){}
     }
 
     void ChangeScene() {

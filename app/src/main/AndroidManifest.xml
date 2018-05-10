@@ -30,9 +30,13 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="oauth" android:host="t4jsample"/>
+
+                <data
+                    android:host="t4jsample"
+                    android:scheme="oauth" />
             </intent-filter>
         </activity>
         <!--
@@ -69,25 +73,30 @@
         <activity
             android:name=".GuidesActivity"
             android:label="Guides"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".PopUpLanguageActivity"
-            android:theme="@style/AppTheme.PopUpWindow">
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PopUpLanguageActivity"
+            android:theme="@style/AppTheme.PopUpWindow"></activity>
         <activity
             android:name=".SettingsActivity"
             android:label="App settings"
-            android:screenOrientation="portrait" ></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NewsActivity"
             android:label="News"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="oauth" android:host="t4jsample"/>
+
+                <data
+                    android:host="t4jsample"
+                    android:scheme="oauth" />
             </intent-filter>
         </activity>
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>
