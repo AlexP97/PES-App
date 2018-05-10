@@ -52,5 +52,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("Mail", userData.getMail());
         editor.apply();
     }
+
+
 }
 

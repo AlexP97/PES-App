@@ -76,7 +76,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".PopUpLanguageActivity"
-            android:theme="@style/AppTheme.PopUpWindow"></activity>
+            android:theme="@style/AppTheme.PopUpWindow" />
         <activity
             android:name=".SettingsActivity"
             android:label="App settings"
@@ -96,7 +96,15 @@
                     android:scheme="oauth" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity
+            android:name=".ViewGuideActivity"
+            android:label=""
+            android:screenOrientation="portrait"
+            android:textColor="#ffffff" />
+        <activity
+            android:name=".PopUpLoginActivity"
+            android:theme="@style/AppTheme.PopUpWindow" />
     </application>
 
 </manifest>
