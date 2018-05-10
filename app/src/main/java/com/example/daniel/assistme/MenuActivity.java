@@ -11,13 +11,10 @@ import android.view.View;
 public class MenuActivity extends AppCompatActivity {
 
     Context context;
-    User userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Bundle bundle = getIntent().getExtras();
-        userData = (User)bundle.getSerializable("userData");
         context = getApplicationContext();
 
         super.onCreate(savedInstanceState);
@@ -37,16 +34,10 @@ public class MenuActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.account_settings:
                 Intent intent = new Intent(this, EditActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("userData", userData);
-                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
             case R.id.app_settings:
                 Intent intent2 = new Intent(this, SettingsActivity.class);
-                Bundle bundle2 = new Bundle();
-                bundle2.putSerializable("userData", userData);
-                intent2.putExtras(bundle2);
                 startActivity(intent2);
                 break;
         }

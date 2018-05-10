@@ -190,9 +190,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     void ChangeScene() {
         Intent intent = new Intent(context, MenuActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userData", userData);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

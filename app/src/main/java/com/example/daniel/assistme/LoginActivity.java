@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -12,12 +13,15 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+
+import javax.net.ssl.HttpsURLConnection;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -138,33 +142,73 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
-            Toast t = null;
-            if (result == null) {
-                t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
-                t.show();
+            try {
+                Toast t = null;
+                if (result == null) {
+                    t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
+                    t.show();
+                } else if (result.contains("true")) {
+                    MainActivity.setSharedPreferences(userData);
+                    GetUserData();
+                } else if (result.contains("false")) {
+                    t = Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT);
+                    t.show();
+                } else {
+                    t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
+                    t.show();
+                }
+
+                super.onPostExecute(result);
             }
-            else if (result.contains("true")) {
-                MainActivity.setSharedPreferences(userData);
-                ChangeScene();
-            }
-            else if (result.contains("false")) {
-                t = Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT);
-                t.show();
-            }
-            else {
-                t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
-                t.show();
+            catch(Exception e){}
+        }
+
+    }
+
+    void GetUserData() {
+
+        try {
+            // Create URL
+            URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/login.php");
+
+            // Create connection
+            HttpsURLConnection myConnection =
+                    (HttpsURLConnection) url.openConnection();
+
+            InputStream responseBody = myConnection.getInputStream();
+
+            InputStreamReader responseBodyReader =
+                    new InputStreamReader(responseBody, "UTF-8");
+
+            JsonReader jsonReader = new JsonReader(responseBodyReader);
+
+            jsonReader.beginObject(); // Start processing the JSON object
+            while (jsonReader.hasNext()) { // Loop through all keys
+                String key = jsonReader.nextName(); // Fetch the next key
+                if (key.equals("userData")) { // Check if desired key
+                    // Fetch the value as a String
+                    String value = jsonReader.nextString();
+
+                    // Do something with the value
+                    Log.d("userData", value);
+
+                    break; // Break out of the loop
+                } else {
+                    jsonReader.skipValue(); // Skip values of other keys
+                }
             }
 
-            super.onPostExecute(result);
+            jsonReader.close();
+
+            myConnection.disconnect();
+
+            ChangeScene();
         }
+        catch(Exception e){}
     }
 
     void ChangeScene() {
         Intent intent = new Intent(context, MenuActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userData", userData);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

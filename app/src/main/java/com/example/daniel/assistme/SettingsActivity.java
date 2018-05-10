@@ -8,13 +8,8 @@ import android.view.View;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    User userData;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Bundle bundle = getIntent().getExtras();
-        userData = (User)bundle.getSerializable("userData");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
@@ -23,9 +18,6 @@ public class SettingsActivity extends AppCompatActivity {
     public void LanguageOptions(View view){
 
         Intent intent = new Intent(this, PopUpLanguageActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("userData", userData);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 
