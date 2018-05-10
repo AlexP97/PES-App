@@ -45,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void ChatButton(View view) {
-        Intent intent = new Intent(context, EditActivity.class);
+        Intent intent = new Intent(context, ChatActivity.class);
         startActivity(intent);
     }
 
