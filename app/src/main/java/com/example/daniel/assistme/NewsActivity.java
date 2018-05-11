@@ -1,12 +1,19 @@
 package com.example.daniel.assistme;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.DataSetObserver;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -22,7 +29,8 @@ public class NewsActivity extends AppCompatActivity {
     Twitter twitter;
     twitter4j.User user;
     ListView recyclerView;
-    List<New> newsList = new ArrayList<>();
+    NewAdapter newAdapter;
+    ArrayList<New> newsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +39,27 @@ public class NewsActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
-        recyclerView = (ListView) findViewById(R.id.recyclerView1);
-        ListAdapter adapter = new ListAdapter(this, newsList){};
-        recyclerView.setAdapter(adapter);
+
         TwitterConfig twitterConfig = new TwitterConfig();
         twitterConfig.configTwitter();
         twitter = twitterConfig.getTwitterInstance();
         AsyncTest asyncTest = new AsyncTest();
         asyncTest.execute();
+
+        recyclerView = (ListView) findViewById(R.id.recyclerView1);
+
+        newAdapter = new NewAdapter(this, newsList);
+
+        recyclerView.setAdapter(newAdapter);
+
+        recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int pos = position;
+
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(newsList.get(pos).getUrl())));
+            }
+        });
     }
     private class AsyncTest extends AsyncTask<String, Void, List<twitter4j.Status>> {
 
@@ -70,6 +91,7 @@ public class NewsActivity extends AppCompatActivity {
                 String link = "https://twitter.com/CEARefugio/status/" + status.getId();
                 news = new New(text, link);
                 newsList.add(news);
+                newAdapter.addAll(news);
             }
         }
     }
