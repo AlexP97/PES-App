@@ -7,8 +7,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -57,7 +59,8 @@ public class NewsActivity extends AppCompatActivity {
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View v = inflater.inflate(R.layout.activity_news, null);
             LinearLayout ll = (LinearLayout) v.findViewById(R.id.linearLayout1);
-            for(twitter4j.Status status : last_tweets){
+            for(int i = 0; i < 20; i++){
+                final twitter4j.Status status = last_tweets.get(i);
                 LinearLayout ll2 = new LinearLayout(context);
                 ll.setOrientation(LinearLayout.VERTICAL);
                 String statusText = status.getText();
@@ -66,25 +69,32 @@ public class NewsActivity extends AppCompatActivity {
                 TextView tv = new TextView(context);
                 if (startLink > 0){
                     text = statusText.substring(0, startLink - 1);
-                    final String link = statusText.substring(startLink);
                     tv.setText(text);
-                    tv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(link)));
-                        }
-                    });
-                    tv.isClickable();
                 }
                 else{
                     tv.setText(statusText);
                 }
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String link = "https://twitter.com/CEARefugio/status/" + status.getId();
+                        startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(link)));
+                    }
+                });
+                tv.isClickable();
                 tv.setFocusable(true);
                 tv.setTextColor(Color.BLACK);
+                tv.setBackgroundColor(0xffe6ffff);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                params.topMargin = 20;
+                params.bottomMargin = 20;
+                params.leftMargin = 20;
+                params.rightMargin = 20;
+                ll2.setLayoutParams(params);
                 ll2.addView(tv);
                 ll.addView(ll2);
-                setContentView(v);
             }
+            setContentView(v);
         }
     }
 }
