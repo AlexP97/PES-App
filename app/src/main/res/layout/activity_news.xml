@@ -4,16 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:clickable="true"
+    <android.support.v7.widget.ListView
+        android:id="@+id/recyclerView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
-    </ScrollView>
+        android:layout_height="match_parent" />
 </LinearLayout>
