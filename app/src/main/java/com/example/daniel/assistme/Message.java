@@ -3,6 +3,7 @@ package com.example.daniel.assistme;
 public class Message {
 
     String messageBody;
+    String photoUrl;
     String userName;
     String userImage;
     String date;
@@ -15,6 +16,15 @@ public class Message {
 
     public Message(String messageBody, String userName, String userImage, String date, String msg_type) {
         this.messageBody = messageBody;
+        this.userName = userName;
+        this.userImage = userImage;
+        this.date = date;
+        this.msg_type = msg_type;
+    }
+
+    public Message(String messageBody, String photoUrl, String userName, String userImage, String date, String msg_type) {
+        this.messageBody = messageBody;
+        this.photoUrl = photoUrl;
         this.userName = userName;
         this.userImage = userImage;
         this.date = date;
@@ -59,5 +69,13 @@ public class Message {
 
     public void setMsg_type(String msg_type) {
         this.msg_type = msg_type;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

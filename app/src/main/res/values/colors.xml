@@ -5,4 +5,5 @@
     <color name="colorAccent">#029AB5</color>
     <color name="switchTrail">#B8DEDD</color>
     <color name="colorBlack">#000000</color>
+    <color name="messageSent">#BBEEFF</color>
 </resources>
