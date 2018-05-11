@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "715926170833",
+    "firebase_url": "https://assistme-7245f.firebaseio.com",
+    "project_id": "assistme-7245f",
+    "storage_bucket": "assistme-7245f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715926170833:android:217d68844b47cd64",
+        "android_client_info": {
+          "package_name": "com.example.daniel.assistme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715926170833-4vt84k63tsufgrq4ng4ckfgj0gehl3mo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMClJgf1Af_FSEUSh2sZNTTD1aKN-niAg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
