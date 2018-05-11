@@ -90,7 +90,6 @@ public class NewsActivity extends AppCompatActivity {
                 }
                 String link = "https://twitter.com/CEARefugio/status/" + status.getId();
                 news = new New(text, link);
-                newsList.add(news);
                 newAdapter.addAll(news);
             }
         }
