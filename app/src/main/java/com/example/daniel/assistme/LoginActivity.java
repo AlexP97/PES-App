@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,11 +80,13 @@ public class LoginActivity extends AppCompatActivity {
         data += "&" + URLEncoder.encode("password", "UTF-8") + "="
                 + URLEncoder.encode(pass, "UTF-8");
 
-        userData = new User(username, pass);
+        //userData = new User(username, pass);
+        //userData = null;
 
         //Poner la peticion http aqui
         AsyncLogin asyncLogin = new AsyncLogin();
         asyncLogin.execute(data);
+
     }
 
     private class AsyncLogin extends AsyncTask<String, Void, String> {
@@ -94,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/login.php");
+                //URL url = new URL("http://172.17.1.243:8080/PES_BackEnd/peticiones_php/login.php");
 
                 // Send POST data request
 
@@ -104,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                 for (int i = 0; i < data.length; ++i) d += data[i];
                 wr.write( d );
                 wr.flush();
-                Log.d("data", d);
+                Log.e("data", d);
 
                 // Get the server response
 
@@ -120,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 String jsonString = sb.toString();
-                Log.d("result", jsonString);
+                Log.e("result", jsonString);
                 return jsonString;
             }
             catch(Exception ex) {
@@ -142,54 +147,51 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-
             try {
                 Toast t = null;
                 if (result == null) {
                     t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
                     t.show();
                 } else if (result.contains("true")) {
-                    MainActivity.setSharedPreferences(userData);
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            try {
-                                // Create URL
-                                URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/user.php");
-
-                                // Create connection
-                                HttpURLConnection myConnection =
-                                        (HttpURLConnection) url.openConnection();
-
-                                InputStream responseBody = myConnection.getInputStream();
-
-                                InputStreamReader responseBodyReader =
-                                        new InputStreamReader(responseBody, "UTF-8");
-
-                                JsonReader jsonReader = new JsonReader(responseBodyReader);
-
-                                jsonReader.beginObject(); // Start processing the JSON object
-                                while (jsonReader.hasNext()) { // Loop through all keys
-                                    String key = jsonReader.nextName(); // Fetch the next key
-
-                                    String value = jsonReader.nextString();
-                                    // Do something with the value
-                                    Log.d(key, value);
-                                }
-
-                                jsonReader.close();
-
-                                myConnection.disconnect();
-
-                                ChangeScene();
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String username = "EMPTY";
+                        String name = "EMPTY";
+                        String surname = "EMPTY";
+                        String email = "EMPTY";
+                        String country = "EMPTY";
+                        String usertype = "EMPTY";
+                        if (jsonObject.has("data")) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            if(data.has("username")){
+                                username = data.getString("username");
                             }
-                            catch(Exception e){
-                                Log.d("error", e.toString());
+                            if(data.has("name")){
+                                name = data.getString("name");
                             }
-
+                            if(data.has("surname")){
+                                surname = data.getString("surname");
+                            }
+                            if(data.has("email")){
+                                email = data.getString("email");
+                            }
+                            if(data.has("country")){
+                                country = data.getString("country");
+                            }
+                            if(data.has("usertype")){
+                                usertype = data.getString("usertype");
+                            }
                         }
-                    });
+
+                        if(username != "EMPTY"){
+                            userData = new User(username, name, surname, email, country, usertype);
+                        }
+
+                        ChangeScene();
+                    }
+                    catch(Exception e){
+                        Log.d("error", e.toString());
+                    }
                 } else if (result.contains("false")) {
                     t = Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT);
                     t.show();

@@ -7,16 +7,17 @@ public class User implements Serializable {
     private String name;
     private String surname;
     private String mail;
-    private String password;
+    private String password; // Are you sure?
     private String country;
+    private String usertype;
 
-    public User(String user, String pass, String mail, String name, String surn, String coun){
+    public User(String user, String mail, String name, String surn, String coun, String usertype){
         this.username = user;
-        this.password = pass;
         this.mail = mail;
         this.name = name;
         this.surname = surn;
         this.country = coun;
+        this.usertype = usertype;
     }
 
     public User(String user, String pass){
