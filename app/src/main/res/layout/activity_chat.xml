@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:onClick="CloseChat"
-            android:src="@drawable/arrow_icon" />
+            android:src="@drawable/arrow_icon2" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fotoPerfil"
@@ -95,7 +95,7 @@
             android:id="@+id/sendButton"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/register_button"
+            android:background="@drawable/register_button2"
             android:contentDescription="Send"
             android:onClick="SendMessage"
             android:scaleType="fitXY"

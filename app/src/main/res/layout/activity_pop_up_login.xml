@@ -18,14 +18,15 @@
         android:gravity="center"
         android:text="YOU NEED TO BE REGISTERED AND LOGGED IN FOR THIS FEATURE."
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/colorBackgroundFloating"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="30dp">
 
         <Button
             android:id="@+id/button8"
@@ -33,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:onClick="CancelButton"
@@ -45,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:onClick="goRegisterButton"
@@ -57,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:onClick="goLoginButton"

@@ -32,18 +32,20 @@
                 <ImageButton
                     android:id="@+id/guides_button"
                     android:layout_width="match_parent"
-                    android:layout_height="298dp"
+                    android:layout_height="270dp"
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:onClick="GuidesButton"
-                    android:paddingTop="10dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:paddingTop="80dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/guias_icono" />
+                    app:srcCompat="@drawable/guides" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="145dp"
                     android:layout_weight="1"
                     android:contentDescription="guides"
                     android:text="GUIDES"
@@ -58,18 +60,20 @@
                 <ImageButton
                     android:id="@+id/forumButton"
                     android:layout_width="match_parent"
-                    android:layout_height="298dp"
+                    android:layout_height="270dp"
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:onClick="ForumButton"
-                    android:paddingTop="10dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:paddingTop="80dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/foro_icono" />
+                    app:srcCompat="@drawable/foro" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="145dp"
                     android:layout_weight="1"
                     android:autoText="false"
                     android:contentDescription="guides"
@@ -93,18 +97,20 @@
                 <ImageButton
                     android:id="@+id/chat_button"
                     android:layout_width="match_parent"
-                    android:layout_height="298dp"
+                    android:layout_height="270dp"
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:onClick="ChatButton"
-                    android:paddingTop="10dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:paddingTop="80dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/chat_icono" />
+                    app:srcCompat="@drawable/chat" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="145dp"
                     android:layout_weight="1"
                     android:autoText="false"
                     android:contentDescription="guides"
@@ -120,18 +126,20 @@
                 <ImageButton
                     android:id="@+id/news_button"
                     android:layout_width="match_parent"
-                    android:layout_height="298dp"
+                    android:layout_height="270dp"
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:onClick="NewsButton"
-                    android:paddingTop="10dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:paddingTop="80dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/noticias_icono" />
+                    app:srcCompat="@drawable/news" />
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="145dp"
                     android:layout_weight="1"
                     android:autoText="false"
                     android:contentDescription="guides"

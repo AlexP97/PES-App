@@ -2,10 +2,6 @@ package com.example.daniel.assistme;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +9,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class NewAdapter extends BaseAdapter {
+public class GuideAdapter extends BaseAdapter {
 
     protected Activity activity;
-    protected ArrayList<New> items;
+    protected ArrayList<Guide> items;
     protected Context context;
 
-    public NewAdapter (Activity activity, ArrayList<New> items) {
+    public GuideAdapter (Activity activity, ArrayList<Guide> items) {
         this.activity = activity;
         this.items = items;
     }
@@ -35,7 +30,7 @@ public class NewAdapter extends BaseAdapter {
         items.clear();
     }
 
-    public void addAll(New category) {
+    public void addAll(Guide category) {
         items.add(category);
         notifyDataSetChanged();
     }
@@ -57,11 +52,11 @@ public class NewAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inf = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inf.inflate(R.layout.news, null);
+            v = inf.inflate(R.layout.guide_view, null);
         }
 
-        TextView text = v.findViewById(R.id.textViewNew);
-        text.setText(items.get(position).getContent());
+        TextView text = v.findViewById(R.id.textView_title);
+        text.setText(items.get(position).getTitle());
 
         return v;
     }
