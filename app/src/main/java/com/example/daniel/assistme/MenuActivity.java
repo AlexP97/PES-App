@@ -65,7 +65,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void ForumButton(View view) {
-        Intent intent = new Intent(this, PopUpLoginActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 
