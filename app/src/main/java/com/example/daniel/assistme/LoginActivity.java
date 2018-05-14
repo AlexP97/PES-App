@@ -185,6 +185,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         if(username != "EMPTY"){
                             userData = new User(username, name, surname, email, country, usertype);
+                            MainActivity.setSharedPreferences(userData);
                         }
 
                         ChangeScene();
