@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/logo_assistme" />
+        app:srcCompat="@drawable/logo_assistme2" />
 
     <ScrollView
         android:id="@+id/login_form"
@@ -105,9 +105,10 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
-                android:background="@drawable/register_button"
+                android:background="@drawable/register_button2"
                 android:onClick="EditButton"
                 android:text="Edit profile"
+                android:textColor="?android:attr/colorForeground"
                 android:textStyle="bold" />
 
         </LinearLayout>

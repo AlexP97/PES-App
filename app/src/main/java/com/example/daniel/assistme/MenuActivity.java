@@ -48,20 +48,35 @@ public class MenuActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.account_settings:
-                Intent intent = new Intent(this, EditActivity.class);
-                startActivity(intent);
+                if (checkSession()) {
+                    Intent intent = new Intent(this, EditActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(this, PopUpLoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.app_settings:
                 Intent intent2 = new Intent(this, SettingsActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.log_out:
+                MainActivity.Logout();
+                Intent intent3 = new Intent(this, MainActivity.class);
+                startActivity(intent3);
                 break;
         }
         return true;
     }
 
     public void ChatButton(View view) {
-        Intent intent = new Intent(context, ChatActivity.class);
-        startActivity(intent);
+        if (checkSession()) {
+            Intent intent = new Intent(context, ChatActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, PopUpLoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void ForumButton(View view) {
@@ -70,7 +85,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void GuidesButton(View view) throws UnsupportedEncodingException {
-        getGuides();
+        getGuides("");
     }
 
     public void NewsButton(View view) {
@@ -78,20 +93,25 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void getGuides() {
+    private boolean checkSession(){
+        String username = MainActivity.sharedPreferences.getString("Username", null);
+        String password = MainActivity.sharedPreferences.getString("Password", null);
+        return username != null && password != null;
+    }
+
+    private void getGuides(final String search) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
 
                 try {
                     // Create URL
-                    URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/search_guide.php");
+                    String s_url = "http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/search_guide.php?contains="+search;
+                    URL url = new URL(s_url);
 
                     // Create connection
                     HttpURLConnection myConnection =
                             (HttpURLConnection) url.openConnection();
-
-                    myConnection.setRequestProperty("search", "t");
 
                     InputStream responseBody = myConnection.getInputStream();
 

@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Logout(){
-        sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+    public static void Logout(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();

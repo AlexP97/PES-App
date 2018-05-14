@@ -1,30 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuidesActivity">
+    android:orientation="vertical"
+    tools:context=".GuidesActivity"
+    android:background="#DDDDDD">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Search guides"
+            android:inputType="textFilter"
+            android:textColor="?attr/colorBackgroundFloating"
+            android:textColorHint="#ffffff"/>
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:onClick="SearchGuidesButton"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/search_icon" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView5"
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Order  by:" />
-
-        <Button
-            android:id="@+id/Ver"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="50dp"
-            android:onClick="VerButton"
-            android:text="ver guia 14" />
+            android:layout_height="match_parent"
+            android:id="@+id/listGuides">
+        </ListView>
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
