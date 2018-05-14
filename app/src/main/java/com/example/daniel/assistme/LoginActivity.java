@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     User userData;
     Context context;
+    String URL_s = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     private void checkSession(){
         String username = MainActivity.sharedPreferences.getString("Username", null);
         String password = MainActivity.sharedPreferences.getString("Password", null);
+        //URL_s = "http://172.17.1.243:8080/PES_BackEnd/peticiones_php/check_login.php";
+        URL_s = "http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/check_login.php";
         if (username != null && password != null){
             try {
                 login(username, password);
@@ -62,6 +65,9 @@ public class LoginActivity extends AppCompatActivity {
 
         EditText passEdit = (EditText) findViewById(R.id.password);
         String pass = passEdit.getText().toString();
+
+        //URL_s = "http://172.17.1.243:8080/PES_BackEnd/peticiones_php/login.php";
+        URL_s = "http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/login.php";
 
         if (username.equals("") || pass.equals("")){
 
@@ -97,8 +103,8 @@ public class LoginActivity extends AppCompatActivity {
             BufferedReader reader=null;
 
             try {
-                URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/login.php");
-                //URL url = new URL("http://172.17.1.243:8080/PES_BackEnd/peticiones_php/login.php");
+                //URL url = new URL("http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/login.php");
+                URL url = new URL(URL_s);
 
                 // Send POST data request
 
@@ -147,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            Log.e("WTF","");
             try {
                 Toast t = null;
                 if (result == null) {
@@ -161,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
                         String email = "EMPTY";
                         String country = "EMPTY";
                         String usertype = "EMPTY";
+                        String password = "EMPTY";
                         if (jsonObject.has("data")) {
                             JSONObject data = jsonObject.getJSONObject("data");
                             if(data.has("username")){
@@ -181,13 +189,16 @@ public class LoginActivity extends AppCompatActivity {
                             if(data.has("usertype")){
                                 usertype = data.getString("usertype");
                             }
+                            if(data.has("password")){
+                                password = data.getString("password");
+                            }
                         }
 
                         if(username != "EMPTY"){
-                            userData = new User(username, name, surname, email, country, usertype);
+                            userData = new User(username, name, surname, email, country, usertype, password);
                             MainActivity.setSharedPreferences(userData);
                         }
-
+                        Log.e("Checking Pass",userData.getPassword());
                         ChangeScene();
                     }
                     catch(Exception e){

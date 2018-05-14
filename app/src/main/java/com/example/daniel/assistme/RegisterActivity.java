@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                     data += "&" + URLEncoder.encode("country", "UTF-8") + "="
                             + URLEncoder.encode(country, "UTF-8");
 
-                    userData = new User(username, pass, email, name, surname, country);
+                    userData = new User(username, pass, email, name, surname, country, userData.getPassword());
 
                     //Poner la peticion http aqui
                     AsyncRegister asyncRegister = new AsyncRegister();
