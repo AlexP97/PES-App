@@ -18,10 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingBottom="130dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:paddingTop="30dp">
+            android:paddingBottom="150dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,60 +28,23 @@
 
                 <ImageButton
                     android:id="@+id/guides_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="270dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:onClick="GuidesButton"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
-                    android:paddingTop="80dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/guides" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="145dp"
-                    android:layout_weight="1"
-                    android:contentDescription="guides"
-                    android:text="GUIDES"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/background_dark"
-                    android:textColorLink="?android:attr/colorForeground"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:autoSizeTextType="uniform"
-                    tools:text="GUIDES" />
-
                 <ImageButton
                     android:id="@+id/forumButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="270dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:onClick="ForumButton"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
-                    android:paddingTop="80dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/foro" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="145dp"
-                    android:layout_weight="1"
-                    android:autoText="false"
-                    android:contentDescription="guides"
-                    android:text="FORUM"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/background_dark"
-                    android:textColorLink="?android:attr/colorForeground"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:autoSizeTextType="uniform"
-                    tools:text="FORUM" />
 
             </LinearLayout>
 
@@ -96,61 +56,23 @@
 
                 <ImageButton
                     android:id="@+id/chat_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="270dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:onClick="ChatButton"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
-                    android:paddingTop="80dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/chat" />
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="145dp"
-                    android:layout_weight="1"
-                    android:autoText="false"
-                    android:contentDescription="guides"
-                    android:text="CHAT"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/background_dark"
-                    android:textColorLink="?android:attr/colorForeground"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:autoSizeTextType="uniform"
-                    tools:text="CHAT" />
-
                 <ImageButton
                     android:id="@+id/news_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="270dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:onClick="NewsButton"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
-                    android:paddingTop="80dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/news" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="145dp"
-                    android:layout_weight="1"
-                    android:autoText="false"
-                    android:contentDescription="guides"
-                    android:text="NEWS"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/background_dark"
-                    android:textColorLink="?android:attr/colorForeground"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:autoSizeTextType="uniform"
-                    tools:text="NEWS" />
 
             </LinearLayout>
 

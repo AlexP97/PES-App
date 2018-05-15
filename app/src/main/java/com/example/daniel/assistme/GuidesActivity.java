@@ -30,6 +30,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GuidesActivity extends AppCompatActivity {
@@ -76,8 +78,9 @@ public class GuidesActivity extends AppCompatActivity {
             if (i == aux.length-2) title = aux[i+1].substring(1, aux[i+1].length()-2);
             else title = aux[i+1].substring(1, aux[i+1].length()-1);
             g = new Guide(id, title);
-            guideAdapter.addAll(g);
+            guidesList.add(g);
         }
+        Collections.sort(guidesList, new GuideTitleComparator());
     }
 
     public void SearchGuidesButton (View view) {
@@ -125,9 +128,11 @@ public class GuidesActivity extends AppCompatActivity {
 
                     myConnection.disconnect();
 
-                    //ChangeScene("", jsonString);
-                    guideAdapter.clear();
+                    ChangeScene("", jsonString);
+                    /*guideAdapter.clear();
                     getGuides(jsonString);
+                    guideAdapter = new GuideAdapter(GuidesActivity.this, guidesList);
+                    recyclerView.setAdapter(guideAdapter);*/
                 }
                 catch(Exception e){
                     Log.d("error", e.toString());
@@ -196,10 +201,21 @@ public class GuidesActivity extends AppCompatActivity {
             Intent intent = new Intent(context, ViewGuideActivity.class);
             intent.putExtra("infoGuide", response);
             startActivity(intent);
-        } else {
-            Intent i = new Intent(context, GuidesActivity.class);
-            i.putExtra("guides", response);
-            startActivity(i);
+        } else {Intent intent = new Intent(this, GuidesActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.putExtra("guides", response);
+            startActivityForResult(intent, 0);
+            overridePendingTransition(0,0); //0 for no animation
+            //startActivity(intent);
+        }
+    }
+
+    public class GuideTitleComparator implements Comparator<Guide>
+    {
+        public int compare(Guide left, Guide right) {
+            String s1 = left.getTitle();
+            String s2 = right.getTitle();
+            return s1.toLowerCase().compareTo(s2.toLowerCase());
         }
     }
 }
