@@ -18,6 +18,10 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -50,12 +54,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in cear and move the camera
         LatLng cear = new LatLng(41.379377, 2.171869);
-        mMap.addMarker(new MarkerOptions().position(cear).title("CEAR"));
+        //mMap.addMarker(new MarkerOptions().position(cear).title("CEAR"));
         CameraPosition cearCamera = new CameraPosition.Builder().target(cear)
                 .zoom(12f)
                 .bearing(0)
                 .tilt(25)
                 .build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cearCamera));
+        addMarkers();
+    }
+    private void addMarkers(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            String markersString = extras.getString("points");
+            try {
+                JSONArray markers = new JSONArray(markersString);
+                for (int i = 0; i < markers.length(); i++){
+                    JSONObject marker = markers.getJSONObject(i);  //coger un marker
+                    JSONObject locationJSON = marker.getJSONObject("location");
+                    JSONObject titleJSON = marker.getJSONObject("text");
+                    String latS = null, lngS = null, title = null;
+                    if (locationJSON.has("lat")){
+                        latS = marker.getString("lat");
+                    }
+                    if (locationJSON.has("lng")){
+                        lngS = marker.getString("lng");
+                    }
+                    if (titleJSON.has("text")){
+                        title = marker.getString("text");
+                    }
+                    Float latF = null, lngF = null;
+                    if (latS != null) latF = Float.parseFloat(latS);
+                    if (lngS != null) lngF = Float.parseFloat(lngS);
+                    LatLng newMarker = null;
+                    if (latF != null && lngF != null) newMarker = new LatLng(latF, lngF);
+                    if (newMarker != null) mMap.addMarker(new MarkerOptions().position(newMarker).title(title));
+                }
+            } catch (JSONException e) {
+                Toast t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
+                t.show();
+            }
+
+        }
     }
 }
