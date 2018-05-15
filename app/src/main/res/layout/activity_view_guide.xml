@@ -22,8 +22,21 @@
         <WebView
             android:id="@+id/content_html"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?attr/colorBackgroundFloating" />
+            android:layout_height="wrap_content"
+            android:background="?attr/colorBackgroundFloating"
+            android:onClick="MapButton">
+
+        </WebView>
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="143dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center"
+            android:background="@drawable/register_button2"
+            android:onClick="MapButton"
+            android:text="Check Map"
+            android:textColor="?android:attr/colorForeground" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

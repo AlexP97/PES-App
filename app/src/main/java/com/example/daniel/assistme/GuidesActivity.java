@@ -75,7 +75,7 @@ public class GuidesActivity extends AppCompatActivity {
         for (int i = 0; i < aux.length-1; i+=2) {
             String id = aux[i].substring(aux[i].indexOf("[")+1);
             String title;
-            if (i == aux.length-2) title = aux[i+1].substring(1, aux[i+1].length()-2);
+            if (i == aux.length-3) title = aux[i+1].substring(1, aux[i+1].length()-2);
             else title = aux[i+1].substring(1, aux[i+1].length()-1);
             g = new Guide(id, title);
             guidesList.add(g);
