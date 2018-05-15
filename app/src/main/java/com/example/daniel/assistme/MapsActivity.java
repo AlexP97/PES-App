@@ -14,6 +14,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -46,48 +47,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setPadding(200, 200, 200, 200);
 
-        // Add a marker in Sydney and move the camera
+        // Add a marker in cear and move the camera
         LatLng cear = new LatLng(41.379377, 2.171869);
         mMap.addMarker(new MarkerOptions().position(cear).title("CEAR"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(cear));
-        checkLocationPermission();
-        if (mapPermission){
-            mMap.setMyLocationEnabled(true);
-            mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener()
-            {
-                public boolean onMyLocationButtonClick()
-                {
-
-                    return false;
-                }
-            });
-            mMap.setOnMyLocationClickListener(new GoogleMap.OnMyLocationClickListener()
-            {
-                @Override
-                public void onMyLocationClick(@NonNull Location location) {
-
-                }
-            });
-        }
-    }
-    private void checkLocationPermission(){
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                1);
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getApplicationContext(),
-                        "Application will not show your location.", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                mapPermission = true;
-            }
-        }
+        CameraPosition cearCamera = new CameraPosition.Builder().target(cear)
+                .zoom(12f)
+                .bearing(0)
+                .tilt(25)
+                .build();
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cearCamera));
     }
 }
