@@ -29,14 +29,15 @@
         </WebView>
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/mapbutton"
             android:layout_width="143dp"
             android:layout_height="33dp"
             android:layout_gravity="center"
             android:background="@drawable/register_button2"
             android:onClick="MapButton"
             android:text="Check Map"
-            android:textColor="?android:attr/colorForeground" />
+            android:textColor="?android:attr/colorForeground"
+            android:visibility="gone" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
