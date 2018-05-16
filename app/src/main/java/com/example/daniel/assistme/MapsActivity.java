@@ -33,10 +33,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        Bundle extras = getIntent().getExtras();
-        //en el string puntos tienes el contenido de "points" del jotasón que me pasa el get_data_guide.php
-        String puntos = extras.getString("points");
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
