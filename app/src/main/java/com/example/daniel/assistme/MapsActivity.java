@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.Manifest;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -68,6 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle extras = getIntent().getExtras();
         if (extras != null){
             String markersString = extras.getString("points");
+            Log.e("markersString: ", markersString);
             try {
                 JSONArray markers = new JSONArray(markersString);
                 for (int i = 0; i < markers.length(); i++){

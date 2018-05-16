@@ -54,9 +54,15 @@ public class ViewGuideActivity extends AppCompatActivity {
             guidePoints = "EMPTY";
             if (jsonObject.has("title")) guideTitle = jsonObject.getString("title");
             if (jsonObject.has("data")) guideContent = jsonObject.getString("data");
-            if (jsonObject.has("points") || !jsonObject.isNull("points")) guidePoints = jsonObject.getString("points");
+            if (jsonObject.has("points") || !jsonObject.isNull("points")){
+                guidePoints = jsonObject.getString("points");
+            }
+            Log.d("resultado: ", "title: " + guideTitle + ", content: " + guideContent + " points: " + guidePoints);
         }
-        catch (Exception e) {}
+        catch (Exception e) {
+            Log.d("error: ", "aqui da el error");
+            e.printStackTrace();
+        }
     }
 
     public void MapButton(android.view.View view) {
