@@ -75,25 +75,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (int i = 0; i < markers.length(); i++){
                     JSONObject marker = markers.getJSONObject(i);  //coger un marker
                     JSONObject locationJSON = marker.getJSONObject("location");
-                    JSONObject titleJSON = marker.getJSONObject("text");
-                    String latS = null, lngS = null, title = null;
+                    String title = marker.getString("text");
+                    Double latS = null, lngS = null;
                     if (locationJSON.has("lat")){
-                        latS = marker.getString("lat");
+                        latS = locationJSON.getDouble("lat");
                     }
                     if (locationJSON.has("lng")){
-                        lngS = marker.getString("lng");
+                        lngS = locationJSON.getDouble("lng");
                     }
-                    if (titleJSON.has("text")){
-                        title = marker.getString("text");
-                    }
-                    Float latF = null, lngF = null;
-                    if (latS != null) latF = Float.parseFloat(latS);
-                    if (lngS != null) lngF = Float.parseFloat(lngS);
                     LatLng newMarker = null;
-                    if (latF != null && lngF != null) newMarker = new LatLng(latF, lngF);
+                    if (latS != null && lngS != null) newMarker = new LatLng(latS, lngS);
                     if (newMarker != null) mMap.addMarker(new MarkerOptions().position(newMarker).title(title));
                 }
             } catch (JSONException e) {
+                e.printStackTrace();
                 Toast t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
                 t.show();
             }

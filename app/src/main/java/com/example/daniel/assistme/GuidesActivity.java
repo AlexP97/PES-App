@@ -173,14 +173,6 @@ public class GuidesActivity extends AppCompatActivity {
                         sb.append(line + "\n");
                     }
 
-                    int index = sb.indexOf("\\");
-                    Log.d("index", index+"");
-
-                    while (index > 0) {
-                        sb = sb.deleteCharAt(index);
-                        index = sb.indexOf("\\");
-                    }
-
                     String jsonString = sb.toString();
                     Log.d("result", jsonString);
 

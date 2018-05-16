@@ -60,7 +60,7 @@ public class ViewGuideActivity extends AppCompatActivity {
             Log.d("resultado: ", "title: " + guideTitle + ", content: " + guideContent + " points: " + guidePoints);
         }
         catch (Exception e) {
-            Log.d("error: ", "aqui da el error");
+            Log.e("error: ", "aqui da el error");
             e.printStackTrace();
         }
     }
