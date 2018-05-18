@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.Manifest;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,6 +18,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -28,10 +33,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapPermission = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        Bundle extras = getIntent().getExtras();
-        //en el string puntos tienes el contenido de "points" del jotasón que me pasa el get_data_guide.php
-        String puntos = extras.getString("points");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -55,12 +56,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in cear and move the camera
         LatLng cear = new LatLng(41.379377, 2.171869);
-        mMap.addMarker(new MarkerOptions().position(cear).title("CEAR"));
+        //mMap.addMarker(new MarkerOptions().position(cear).title("CEAR"));
         CameraPosition cearCamera = new CameraPosition.Builder().target(cear)
                 .zoom(12f)
                 .bearing(0)
                 .tilt(25)
                 .build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cearCamera));
+        addMarkers();
+    }
+    private void addMarkers(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            String markersString = extras.getString("points");
+            Log.e("markersString: ", markersString);
+            try {
+                JSONArray markers = new JSONArray(markersString);
+                for (int i = 0; i < markers.length(); i++){
+                    JSONObject marker = markers.getJSONObject(i);  //coger un marker
+                    JSONObject locationJSON = marker.getJSONObject("location");
+                    String title = marker.getString("text");
+                    Double latS = null, lngS = null;
+                    if (locationJSON.has("lat")){
+                        latS = locationJSON.getDouble("lat");
+                    }
+                    if (locationJSON.has("lng")){
+                        lngS = locationJSON.getDouble("lng");
+                    }
+                    LatLng newMarker = null;
+                    if (latS != null && lngS != null) newMarker = new LatLng(latS, lngS);
+                    if (newMarker != null) mMap.addMarker(new MarkerOptions().position(newMarker).title(title));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
+                t.show();
+            }
+
+        }
     }
 }

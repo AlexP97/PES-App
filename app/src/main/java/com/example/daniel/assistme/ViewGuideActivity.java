@@ -26,23 +26,18 @@ public class ViewGuideActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         guideInfo = extras.getString("infoGuide");
 
-        getInfoGuide();
+        //String[] infoGuide = getInfoGuide();
 
+        //TextView titleView = (TextView) findViewById(R.id.title);
+        //titleView.setText(guideTitle);
+
+        getInfoGuide();
 
         TextView contentView = (TextView) findViewById(R.id.content);
         contentView.setText(guideTitle);
 
         WebView contentHtmlView = (WebView) findViewById(R.id.content_html);
         contentHtmlView.loadData(guideContent, "text/html; charset=utf-8", "utf-8");
-
-        if (!guidePoints.equals("null")) {
-            Button checkMap = (Button)findViewById(R.id.mapbutton);
-            checkMap.setVisibility(View.VISIBLE);
-        }
-        else {
-            Button checkMap = (Button)findViewById(R.id.mapbutton);
-            checkMap.setVisibility(View.GONE);
-        }
     }
 
     private void getInfoGuide()  {
@@ -52,6 +47,8 @@ public class ViewGuideActivity extends AppCompatActivity {
         aux2 = aux[1].split(":");
         guideContent = aux2[1].substring(1, aux2[1].length()-1);
 
+
+
         try {
             JSONObject jsonObject = new JSONObject(guideInfo);
             guideTitle = "EMPTY";
@@ -59,13 +56,12 @@ public class ViewGuideActivity extends AppCompatActivity {
             guidePoints = "EMPTY";
             if (jsonObject.has("title")) guideTitle = jsonObject.getString("title");
             if (jsonObject.has("data")) guideContent = jsonObject.getString("data");
-            if (jsonObject.has("points")) guidePoints = jsonObject.getString("points");
-
+            if (jsonObject.has("points") || !jsonObject.isNull("points")) guidePoints = jsonObject.getString("points");
         }
         catch (Exception e) {}
     }
 
-    public void MapButton(View view) {
+    public void MapButton(android.view.View view) {
         if (guidePoints != "EMPTY") {
             android.content.Intent intent = new android.content.Intent(context, MapsActivity.class);
             intent.putExtra("points", guidePoints);
