@@ -30,8 +30,8 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Bundle bundle = getIntent().getExtras();
-        userData = (User)bundle.getSerializable("userData");
+        //Bundle bundle = getIntent().getExtras();
+        userData = MainActivity.getUser();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
@@ -45,11 +45,13 @@ public class EditActivity extends AppCompatActivity {
         EditText emailEdit = (EditText) findViewById(R.id.email);
         emailEdit.setText(userData.getMail());
 
-        EditText passEdit = (EditText) findViewById(R.id.password);
-        passEdit.setText(userData.getPassword());
-
         EditText countryEdit = (EditText) findViewById(R.id.country);
         countryEdit.setText(userData.getCountry());
+    }
+
+    public void change_password(View view) throws  IOException, JSONException{
+        Toast t = Toast.makeText(getApplicationContext(), "Work in Progress", Toast.LENGTH_SHORT);
+        t.show();
     }
 
     public void EditButton(View view) throws IOException, JSONException {
@@ -63,8 +65,8 @@ public class EditActivity extends AppCompatActivity {
         EditText emailEdit = (EditText) findViewById(R.id.email);
         String email = emailEdit.getText().toString();
 
-        EditText passEdit = (EditText) findViewById(R.id.password);
-        String pass = passEdit.getText().toString();
+        //EditText passEdit = (EditText) findViewById(R.id.password);
+        //String pass = passEdit.getText().toString();
 
         EditText passRepEdit = (EditText) findViewById(R.id.repeatPassword);
         String passRep = passRepEdit.getText().toString();
@@ -73,27 +75,27 @@ public class EditActivity extends AppCompatActivity {
         String country = countryEdit.getText().toString();
 
         if (name.equals("") || surname.equals("") || email.equals("") ||
-                pass.equals("") || passRep.equals("") || country.equals("")){
+                passRep.equals("") || country.equals("")){
 
             Toast t = Toast.makeText(getApplicationContext(), "Some fields are empty", Toast.LENGTH_SHORT);
             t.show();
         }
         else {
 
-            if (!pass.equals(passRep)) {
+            /*if (!pass.equals(passRep)) {
 
                 Toast t = Toast.makeText(getApplicationContext(), "Passwords don't match", Toast.LENGTH_SHORT);
                 t.show();
             }
-            else {
+            else {*/
 
                 if (email.contains("@")) {
 
                     String data = URLEncoder.encode("username", "UTF-8")
                             + "=" + URLEncoder.encode(userData.getUsername(), "UTF-8");
 
-                    data += "&" + URLEncoder.encode("user_password", "UTF-8") + "="
-                            + URLEncoder.encode(pass, "UTF-8");
+                   // data += "&" + URLEncoder.encode("user_password", "UTF-8") + "="
+                            //+ URLEncoder.encode(pass, "UTF-8");
 
                     data += "&" + URLEncoder.encode("email", "UTF-8") + "="
                             + URLEncoder.encode(email, "UTF-8");
@@ -115,7 +117,7 @@ public class EditActivity extends AppCompatActivity {
                     Toast t = Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT);
                     t.show();
                 }
-            }
+            //}
         }
     }
 

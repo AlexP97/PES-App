@@ -10,6 +10,7 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
     public static SharedPreferences sharedPreferences;
+    private static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void setSharedPreferences(User userData){
+        user = userData;
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("Username", userData.getUsername());
@@ -51,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("Mail", userData.getMail());
         editor.apply();
     }
-
-
+    public static User getUser(){
+        return user;
+    }
 }
 
