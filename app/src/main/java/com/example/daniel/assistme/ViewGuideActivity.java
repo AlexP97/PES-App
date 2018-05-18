@@ -14,7 +14,7 @@ import android.view.View;
 public class ViewGuideActivity extends AppCompatActivity {
 
     android.content.Context context;
-    String guideInfo, guideTitle, guidePoints;
+    String guideTitle, guidePoints;
     public static String guideContent;
 
     @Override
@@ -29,10 +29,13 @@ public class ViewGuideActivity extends AppCompatActivity {
         guidePoints = extras.getString("pointsGuide");
 
 
-        TextView contentView = (TextView) findViewById(R.id.content);
-        contentView.setText(guideTitle);
+        TextView titleView = (TextView) findViewById(R.id.title);
+        titleView.setText(guideTitle);
 
         WebView contentHtmlView = (WebView) findViewById(R.id.content_html);
+        //contentHtmlView.getSettings().setLoadWithOverviewMode(true);
+        contentHtmlView.getSettings().setSupportZoom(true);
+        contentHtmlView.getSettings().setUseWideViewPort(true);
         contentHtmlView.loadData(guideContent, "text/html; charset=utf-8", "utf-8");
 
         if (guidePoints != "-1") {

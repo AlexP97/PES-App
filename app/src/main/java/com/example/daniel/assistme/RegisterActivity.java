@@ -26,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     User userData;
     Context context;
+    String errorT = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,11 +95,24 @@ public class RegisterActivity extends AppCompatActivity {
                     data += "&" + URLEncoder.encode("country", "UTF-8") + "="
                             + URLEncoder.encode(country, "UTF-8");
 
-                    userData = new User(username, pass, email, name, surname, country, userData.getPassword());
+                    userData = new User(username, pass, email, name, surname, country, pass);
 
                     //Poner la peticion http aqui
                     AsyncRegister asyncRegister = new AsyncRegister();
                     asyncRegister.execute(data);
+
+                    if (!errorT.isEmpty()) {
+                        Toast t = null;
+
+                        if (errorT.contains(username)) {
+                            t = Toast.makeText(getApplicationContext(), "Username already taken.", Toast.LENGTH_SHORT);
+                            t.show();
+                        }
+                        if (errorT.contains(email)) {
+                            t = Toast.makeText(getApplicationContext(), "Email already used.", Toast.LENGTH_SHORT);
+                            t.show();
+                        }
+                    }
                 }
                 else {
                     Toast t = Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_SHORT);
@@ -144,6 +158,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 String jsonString = sb.toString();
                 Log.d("result", jsonString);
+
                 return jsonString;
             }
             catch(Exception ex) {
@@ -164,27 +179,33 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(String response) {
+            try {
+                String correct = "EMPTY";
+                String result = "EMPTY";
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.has("correct")) correct = jsonObject.getString("correct");
+                if (jsonObject.has("result")) result = jsonObject.getString("result");
 
-            Toast t = null;
-            if (result == null) {
-                t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
-                t.show();
-            }
-            else if (result.contains("true")){
-                MainActivity.setSharedPreferences(userData);
-                ChangeScene();
-            }
-            else if (result.contains("false")) {
-                t = Toast.makeText(getApplicationContext(), "Register failed", Toast.LENGTH_SHORT);
-                t.show();
-            }
-            else {
-                t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
-                t.show();
-            }
+                Toast t = null;
+                if (result == null) {
+                    t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
+                    t.show();
+                }
+                else if (correct.contains("true")){
+                    MainActivity.setSharedPreferences(userData);
+                    ChangeScene();
+                }
+                else if (correct.contains("false")) {
+                    errorT = result;
+                }
+                else {
+                    t = Toast.makeText(getApplicationContext(), "Nothing happened", Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            } catch (Exception e) {}
 
-            super.onPostExecute(result);
+            super.onPostExecute(response);
         }
     }
 
