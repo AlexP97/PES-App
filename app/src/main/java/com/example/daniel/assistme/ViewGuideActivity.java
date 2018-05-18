@@ -14,7 +14,8 @@ import android.view.View;
 public class ViewGuideActivity extends AppCompatActivity {
 
     android.content.Context context;
-    String guideInfo, guideTitle, guideContent, guidePoints;
+    String guideInfo, guideTitle, guidePoints;
+    public static String guideContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,41 +25,23 @@ public class ViewGuideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_guide);
 
         Bundle extras = getIntent().getExtras();
-        guideInfo = extras.getString("infoGuide");
+        guideTitle = extras.getString("titleGuide");
+        guidePoints = extras.getString("pointsGuide");
 
-        //String[] infoGuide = getInfoGuide();
-
-        //TextView titleView = (TextView) findViewById(R.id.title);
-        //titleView.setText(guideTitle);
-
-        getInfoGuide();
 
         TextView contentView = (TextView) findViewById(R.id.content);
         contentView.setText(guideTitle);
 
         WebView contentHtmlView = (WebView) findViewById(R.id.content_html);
         contentHtmlView.loadData(guideContent, "text/html; charset=utf-8", "utf-8");
-    }
 
-    private void getInfoGuide()  {
-        String[] aux = guideInfo.split(",");
-        String[] aux2 = aux[0].split(":");
-        guideTitle = " " + aux2[1].substring(1, aux2[1].length()-1);
-        aux2 = aux[1].split(":");
-        guideContent = aux2[1].substring(1, aux2[1].length()-1);
-
-
-
-        try {
-            JSONObject jsonObject = new JSONObject(guideInfo);
-            guideTitle = "EMPTY";
-            guideContent = "EMPTY";
-            guidePoints = "EMPTY";
-            if (jsonObject.has("title")) guideTitle = jsonObject.getString("title");
-            if (jsonObject.has("data")) guideContent = jsonObject.getString("data");
-            if (jsonObject.has("points") || !jsonObject.isNull("points")) guidePoints = jsonObject.getString("points");
+        if (guidePoints != "-1") {
+            View b = findViewById(R.id.mapbutton);
+            b.setVisibility(View.VISIBLE);
+        }else {
+            View b = findViewById(R.id.mapbutton);
+            b.setVisibility(View.GONE);
         }
-        catch (Exception e) {}
     }
 
     public void MapButton(android.view.View view) {

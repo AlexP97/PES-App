@@ -41,6 +41,7 @@ public class GuidesActivity extends AppCompatActivity {
     ArrayList<Guide> guidesList = new ArrayList<>();
     ListView recyclerView;
     GuideAdapter guideAdapter;
+    String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,16 +71,22 @@ public class GuidesActivity extends AppCompatActivity {
     }
 
     private void getGuides(String s) {
-        String[] aux = s.split(":");
-        aux = aux[1].split(",");
-        for (int i = 0; i < aux.length-1; i+=2) {
-            String id = aux[i].substring(aux[i].indexOf("[")+1);
-            String title;
-            if (i == aux.length-3) title = aux[i+1].substring(1, aux[i+1].length()-2);
-            else title = aux[i+1].substring(1, aux[i+1].length()-1);
-            g = new Guide(id, title);
-            guidesList.add(g);
+        try {
+            JSONObject js = new JSONObject(s);
+            data = "EMTPY";
+            if (js.has("data")) data = js.getString("data");
         }
+        catch (Exception e) {}
+
+        data = data.substring(1, data.length()-1);
+
+        String aux[] = data.split(",");
+        for (int i = 0; i < aux.length; i+=2) {
+            String id = aux[i];
+            String title = aux[i+1].substring(1, aux[i+1].length()-1);
+            guidesList.add(new Guide(id, title));
+        }
+
         Collections.sort(guidesList, new GuideTitleComparator());
     }
 
@@ -89,7 +96,6 @@ public class GuidesActivity extends AppCompatActivity {
         String search = searchEdit.getText().toString();
 
         searchGuides(search);
-
     }
 
     private void searchGuides (final String search) {
@@ -123,16 +129,13 @@ public class GuidesActivity extends AppCompatActivity {
                         sb.append(line + "\n");
                     }
 
-                    String jsonString = sb.toString();
-                    Log.d("result", jsonString);
+                    String jsonString[] = new String[1];
+                    jsonString[0] = sb.toString();
+                    Log.d("result", jsonString[0]);
 
                     myConnection.disconnect();
 
                     ChangeScene("", jsonString);
-                    /*guideAdapter.clear();
-                    getGuides(jsonString);
-                    guideAdapter = new GuideAdapter(GuidesActivity.this, guidesList);
-                    recyclerView.setAdapter(guideAdapter);*/
                 }
                 catch(Exception e){
                     Log.d("error", e.toString());
@@ -178,7 +181,14 @@ public class GuidesActivity extends AppCompatActivity {
 
                     myConnection.disconnect();
 
-                    ChangeScene("viewGuide", jsonString);
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    String[] guide = new String[3];
+                    if (jsonObject.has("title")) guide[0] = jsonObject.getString("title");
+                    if (jsonObject.has("data")) guide[1] = jsonObject.getString("data");
+                    if (jsonObject.has("points") || !jsonObject.isNull("points")) guide[2] = jsonObject.getString("points");
+                    else guide[2] = "-1";
+
+                    ChangeScene("viewGuide", guide);
                 }
                 catch(Exception e){
                     Log.d("error", e.toString());
@@ -188,14 +198,16 @@ public class GuidesActivity extends AppCompatActivity {
         });
     }
 
-    void ChangeScene(String act, String response) {
+    void ChangeScene(String act, String[] response) {
         if (act.equals("viewGuide")) {
             Intent intent = new Intent(context, ViewGuideActivity.class);
-            intent.putExtra("infoGuide", response);
+            intent.putExtra("titleGuide", response[0]);
+            ViewGuideActivity.guideContent = response[1];
+            intent.putExtra("pointsGuide", response[2]);
             startActivity(intent);
         } else {Intent intent = new Intent(this, GuidesActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            intent.putExtra("guides", response);
+            intent.putExtra("guides", response[0]);
             startActivityForResult(intent, 0);
             overridePendingTransition(0,0); //0 for no animation
             //startActivity(intent);

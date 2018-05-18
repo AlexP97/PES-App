@@ -145,15 +145,6 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
-    private void getGuides2() throws UnsupportedEncodingException {
-
-        String data = URLEncoder.encode("contains", "UTF-8")
-                + "=" + URLEncoder.encode("t", "UTF-8");
-
-        MenuActivity.AsyncGuides asyncGuides = new MenuActivity.AsyncGuides();
-        asyncGuides.execute(data);
-    }
-
     private void ChangeScene(String guides) {
         Intent i = new Intent(context, GuidesActivity.class);
         i.putExtra("guides", guides);
