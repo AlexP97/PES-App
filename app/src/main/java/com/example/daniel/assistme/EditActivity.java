@@ -30,8 +30,8 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Bundle bundle = getIntent().getExtras();
-        userData = (User)bundle.getSerializable("userData");
+        //Bundle bundle = getIntent().getExtras();
+        userData = MainActivity.getUser();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
@@ -44,9 +44,6 @@ public class EditActivity extends AppCompatActivity {
 
         EditText emailEdit = (EditText) findViewById(R.id.email);
         emailEdit.setText(userData.getMail());
-
-        EditText passEdit = (EditText) findViewById(R.id.password);
-        passEdit.setText(userData.getPassword());
 
         EditText countryEdit = (EditText) findViewById(R.id.country);
         countryEdit.setText(userData.getCountry());
