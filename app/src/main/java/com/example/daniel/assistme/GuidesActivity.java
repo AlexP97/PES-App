@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,7 +42,6 @@ public class GuidesActivity extends AppCompatActivity {
     ArrayList<Guide> guidesList = new ArrayList<>();
     ListView recyclerView;
     GuideAdapter guideAdapter;
-    String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,18 +73,21 @@ public class GuidesActivity extends AppCompatActivity {
     private void getGuides(String s) {
         try {
             JSONObject js = new JSONObject(s);
-            data = "EMTPY";
-            if (js.has("data")) data = js.getString("data");
+            String dataString = "EMPTY";
+            if (js.has("data")) dataString = js.getString("data");
+
+            JSONArray guides = new JSONArray(dataString);
+            for (int i = 0; i < guides.length(); i++) {
+                JSONObject guide = guides.getJSONObject(i);  //coger una guia
+                String id = guide.getString("id");
+                String title = guide.getString("title");
+                guidesList.add(new Guide(id, title));
+            }
         }
-        catch (Exception e) {}
-
-        data = data.substring(1, data.length()-1);
-
-        String aux[] = data.split(",");
-        for (int i = 0; i < aux.length; i+=2) {
-            String id = aux[i];
-            String title = aux[i+1].substring(1, aux[i+1].length()-1);
-            guidesList.add(new Guide(id, title));
+        catch (Exception e) {
+            e.printStackTrace();
+            Toast t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
+            t.show();
         }
 
         Collections.sort(guidesList, new GuideTitleComparator());

@@ -74,8 +74,7 @@ public class EditActivity extends AppCompatActivity {
         EditText countryEdit = (EditText) findViewById(R.id.country);
         String country = countryEdit.getText().toString();
 
-        if (name.equals("") || surname.equals("") || email.equals("") ||
-                passRep.equals("") || country.equals("")){
+        if (name.equals("") || surname.equals("") || email.equals("") || country.equals("")){
 
             Toast t = Toast.makeText(getApplicationContext(), "Some fields are empty", Toast.LENGTH_SHORT);
             t.show();

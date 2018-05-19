@@ -33,9 +33,6 @@ public class ViewGuideActivity extends AppCompatActivity {
         titleView.setText(guideTitle);
 
         WebView contentHtmlView = (WebView) findViewById(R.id.content_html);
-        //contentHtmlView.getSettings().setLoadWithOverviewMode(true);
-        contentHtmlView.getSettings().setSupportZoom(true);
-        contentHtmlView.getSettings().setUseWideViewPort(true);
         contentHtmlView.loadData(guideContent, "text/html; charset=utf-8", "utf-8");
 
         if (guidePoints != "-1") {
