@@ -39,23 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         super.onCreate(savedInstanceState);
-        checkSession();
         setContentView(R.layout.activity_login);
-    }
-
-    private void checkSession(){
-        String username = MainActivity.sharedPreferences.getString("Username", null);
-        String password = MainActivity.sharedPreferences.getString("Password", null);
-        //URL_s = "http://172.17.1.243:8080/PES_BackEnd/peticiones_php/check_login.php";
-        URL_s = "http://ec2-35-180-58-81.eu-west-3.compute.amazonaws.com/PES_AssistMe_BackEnd/peticiones_php/check_login.php";
-        if (username != null && password != null){
-            try {
-                login(username, password);
-            } catch (UnsupportedEncodingException e) {
-                Toast t = Toast.makeText(getApplicationContext(), "Error desconocido", Toast.LENGTH_SHORT);
-                t.show();
-            }
-        }
     }
 
     public void LoginButton (View view) throws IOException {
