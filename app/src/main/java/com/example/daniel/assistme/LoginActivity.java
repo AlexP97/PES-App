@@ -179,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         if(username != "EMPTY"){
-                            userData = new User(username, name, surname, email, country, usertype, password);
+                            userData = new User(username, email, name, surname, country, usertype, password);
                             MainActivity.setSharedPreferences(userData);
                         }
                         Log.e("Checking Pass",userData.getPassword());

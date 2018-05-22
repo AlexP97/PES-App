@@ -30,22 +30,21 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //Bundle bundle = getIntent().getExtras();
         userData = MainActivity.getUser();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        EditText nameEdit = (EditText) findViewById(R.id.name);
+        EditText nameEdit =  findViewById(R.id.name);
         nameEdit.setText(userData.getName());
 
-        EditText surnameEdit = (EditText) findViewById(R.id.surname);
+        EditText surnameEdit = findViewById(R.id.surname);
         surnameEdit.setText(userData.getSurname());
 
-        EditText emailEdit = (EditText) findViewById(R.id.email);
+        EditText emailEdit = findViewById(R.id.email);
         emailEdit.setText(userData.getMail());
 
-        EditText countryEdit = (EditText) findViewById(R.id.country);
+        EditText countryEdit = findViewById(R.id.country);
         countryEdit.setText(userData.getCountry());
     }
 
