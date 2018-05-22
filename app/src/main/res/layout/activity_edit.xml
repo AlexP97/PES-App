@@ -40,7 +40,7 @@
                 android:imeActionLabel="Name"
                 android:imeOptions="actionUnspecified"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"/>
 
             <EditText
                 android:id="@+id/surname"
@@ -74,6 +74,18 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
+            <EditText
+                android:id="@+id/current_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Current Password"
+                android:imeActionId="6"
+                android:imeActionLabel="Password"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
+
             <Button
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
@@ -87,18 +99,6 @@
                 android:text="Edit profile"
                 android:textColor="?android:attr/colorForeground"
                 android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/current_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Current Password"
-                android:imeActionId="6"
-                android:imeActionLabel="Password"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/new_password"

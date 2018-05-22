@@ -10,8 +10,9 @@ public class User implements Serializable {
     private String password; // Are you sure?
     private String country;
     private String usertype;
+    private String url_picture;
 
-    public User(String user, String mail, String name, String surn, String coun, String usertype, String password){
+    public User(String user, String mail, String name, String surn, String coun, String usertype, String password, String url_picture){
         this.username = user;
         this.mail = mail;
         this.name = name;
@@ -19,6 +20,7 @@ public class User implements Serializable {
         this.country = coun;
         this.usertype = usertype;
         this.password = password;
+        this.url_picture = url_picture;
     }
 
     public User(String user, String pass){
@@ -67,6 +69,13 @@ public class User implements Serializable {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUrl_picture() {
+        return url_picture;
+    }
+    public void setUrl_picture(String url_picture) {
+        this.url_picture = url_picture;
     }
 }
 

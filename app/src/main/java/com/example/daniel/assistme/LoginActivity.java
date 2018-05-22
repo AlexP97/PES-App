@@ -153,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                         String country = "EMPTY";
                         String usertype = "EMPTY";
                         String password = "EMPTY";
+                        String url_picture = "EMPTY";
                         if (jsonObject.has("data")) {
                             JSONObject data = jsonObject.getJSONObject("data");
                             if(data.has("username")){
@@ -176,10 +177,13 @@ public class LoginActivity extends AppCompatActivity {
                             if(data.has("password")){
                                 password = data.getString("password");
                             }
+                            if(data.has("url_picture")){
+                                url_picture = data.getString("url_picture");
+                            }
                         }
 
                         if(username != "EMPTY"){
-                            userData = new User(username, email, name, surname, country, usertype, password);
+                            userData = new User(username, email, name, surname, country, usertype, password, url_picture);
                             MainActivity.setSharedPreferences(userData);
                         }
                         Log.e("Checking Pass",userData.getPassword());
