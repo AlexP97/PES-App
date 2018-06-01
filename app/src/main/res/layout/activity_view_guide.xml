@@ -41,5 +41,12 @@
             android:textColor="?android:attr/colorForeground"
             android:visibility="gone" />
 
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="translate"
+            android:text="Button" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
