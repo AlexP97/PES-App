@@ -17,4 +17,32 @@
         completions."
     </string>
     <string name="title_activity_register">Sign up</string>
+    <string name="guide">Guide</string>
+    <string name="news">News</string>
+    <string name="chat">Chat</string>
+    <string name="ResourceGuideSearchGuide">Search guide</string>
+    <string name="ResourceLoginUsername">Username</string>
+    <string name="ResourceLoginPassword">Password</string>
+    <string name="ResourceLoginLogin">Login</string>
+    <string name="ResourceMainRegister">REGISTER</string>
+    <string name="ResourceMainAlreadyRegister">ALREADY REGISTERED?</string>
+    <string name="ResourceMainGuestLogin">ENTER AS A GUEST</string>
+    <string name="ResourceRegisterName">Name</string>
+    <string name="ResourceRegisterSurname">Surname</string>
+    <string name="ResourceRegisterRepeatPassword">Repeat password</string>
+    <string name="ResourceRegisterCountry">Country</string>
+    <string name="ResourceChatSend">Send</string>
+    <string name="ResourceChatTypeMessage">Type a message</string>
+    <string name="ResourceProfileNewPassword">New password</string>
+    <string name="ResourceProfileCurrentPassword">Current Password</string>
+    <string name="ResourceProfileRepeatNewPassword">Repeat the new password</string>
+    <string name="ResourceProfileEditProfile">Edit profile</string>
+    <string name="ResourceProfileChangePassword">Change password</string>
+    <string name="ResourceLoginPopUpMessage">YOU NEED TO BE REGISTERED AND LOGGED IN FOR THIS FEATURE.</string>
+    <string name="ResourceSettingsLanguage">Language</string>
+    <string name="ResourceSettingsChangeLanguage">Change app language</string>
+    <string name="ResourceSettingsChangeLnaguageDescription">Changes the language of the text shown on the screen</string>
+    <string name="ResourceSettingsSystem">System</string>
+    <string name="ResourceSettingsNotifications">Show notifications</string>
+    <string name="ResourceSettingsNotificationsDescription">Choose either you want the app to show push\\notifications or not</string>
 </resources>

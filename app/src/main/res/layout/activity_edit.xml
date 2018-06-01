@@ -35,18 +35,18 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name"
+                android:hint="@string/ResourceRegisterName"
                 android:imeActionId="6"
                 android:imeActionLabel="Name"
                 android:imeOptions="actionUnspecified"
                 android:maxLines="1"
-                android:singleLine="true"/>
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/surname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Surname"
+                android:hint="@string/ResourceRegisterSurname"
                 android:imeActionId="6"
                 android:imeActionLabel="Surname"
                 android:imeOptions="actionUnspecified"
@@ -57,7 +57,7 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true" />
@@ -67,7 +67,7 @@
                 android:id="@+id/country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Country"
+                android:hint="@string/ResourceRegisterCountry"
                 android:imeActionId="6"
                 android:imeActionLabel="Country"
                 android:imeOptions="actionUnspecified"
@@ -78,7 +78,7 @@
                 android:id="@+id/current_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Current Password"
+                android:hint="@string/ResourceProfileCurrentPassword"
                 android:imeActionId="6"
                 android:imeActionLabel="Password"
                 android:imeOptions="actionUnspecified"
@@ -96,7 +96,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/register_button2"
                 android:onClick="EditButton"
-                android:text="Edit profile"
+                android:text="@string/ResourceProfileEditProfile"
                 android:textColor="?android:attr/colorForeground"
                 android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
                 android:id="@+id/new_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="New Password"
+                android:hint="@string/ResourceProfileNewPassword"
                 android:imeActionId="6"
                 android:imeActionLabel="Password"
                 android:imeOptions="actionUnspecified"
@@ -116,7 +116,7 @@
                 android:id="@+id/repeatPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Repeat the new Password"
+                android:hint="@string/ResourceProfileRepeatNewPassword"
                 android:imeActionId="6"
                 android:imeActionLabel="Repeat password"
                 android:imeOptions="actionUnspecified"
@@ -127,14 +127,14 @@
             <Button
                 android:id="@+id/email_sign_in_button4"
                 style="?android:textAppearanceSmall"
-                android:layout_width="163dp"
+                android:layout_width="185dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
                 android:background="@drawable/register_button2"
                 android:onClick="change_password"
-                android:text="Change Password"
+                android:text="@string/ResourceProfileChangePassword"
                 android:textColor="?android:attr/colorForeground"
                 android:textStyle="bold" />
 

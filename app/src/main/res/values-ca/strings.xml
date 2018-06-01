@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AssistMe</string>
+    <string name="prompt_email">Correu</string>
+    <string name="ResourceLoginUsername">Nom d\'usuari</string>
+    <string name="ResourceLoginPassword">Contrasenya</string>
+    <string name="ResourceLoginLogin">iniciar sessió</string>
+    <string name="ResourceRegisterName">Nom</string>
+    <string name="ResourceRegisterSurname">Cognom</string>
+    <string name="ResourceRegisterRepeatPassword">Repeteix la contrasenya</string>
+    <string name="ResourceRegisterCountry">Pais</string>
+    <string name="ResourceChatSend">Envia</string>
+    <string name="ResourceChatTypeMessage">Escriu un missatge</string>
+    <string name="ResourceProfileNewPassword">Contrasenya nova</string>
+</resources>

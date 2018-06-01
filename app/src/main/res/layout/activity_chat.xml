@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type a message" />
+            android:hint="@string/ResourceChatTypeMessage" />
 
         <Button
             android:id="@+id/sendButton"
@@ -99,7 +99,7 @@
             android:contentDescription="Send"
             android:onClick="SendMessage"
             android:scaleType="fitXY"
-            android:text="Send" />
+            android:text="@string/ResourceChatSend" />
 
     </LinearLayout>
 

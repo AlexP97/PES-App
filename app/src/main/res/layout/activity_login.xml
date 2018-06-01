@@ -42,7 +42,7 @@
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Username"
+                    android:hint="@string/ResourceLoginUsername"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -50,7 +50,7 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/ResourceLoginPassword"
                     android:imeActionId="6"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
@@ -67,7 +67,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/register_button2"
                     android:onClick="LoginButton"
-                    android:text="Log in"
+                    android:text="@string/ResourceLoginLogin"
                     android:textColor="?android:attr/colorForeground"
                     android:textStyle="bold" />
 

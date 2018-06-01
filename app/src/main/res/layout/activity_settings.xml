@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        android:text="Language"
+        android:text="@string/ResourceSettingsLanguage"
         android:textColor="#1A5E86"
         android:textSize="20sp" />
 
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Change app language"
+            android:text="@string/ResourceSettingsChangeLanguage"
             android:textColor="@color/colorBlack"
             android:textSize="22sp" />
 
@@ -47,7 +47,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Changes the language of the text shown on the screen" />
+            android:text="@string/ResourceSettingsChangeLnaguageDescription" />
     </LinearLayout>
 
     <View
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
-        android:text="System"
+        android:text="@string/ResourceSettingsSystem"
         android:textColor="#1A5E86"
         android:textSize="20sp" />
 
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:paddingTop="10dp"
-            android:text="Show notifications"
+            android:text="@string/ResourceSettingsNotifications"
             android:textColorLink="@android:color/holo_blue_dark"
             android:textSize="22sp" />
 
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:onClick="ToggleNotifications"
-            android:text="Choose either you want the app to show push\nnotifications or not" />
+            android:text="@string/ResourceSettingsNotificationsDescription" />
     </LinearLayout>
 
     <View

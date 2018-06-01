@@ -16,7 +16,7 @@
         android:autoText="false"
         android:background="?attr/colorBackgroundFloating"
         android:gravity="center"
-        android:text="YOU NEED TO BE REGISTERED AND LOGGED IN FOR THIS FEATURE."
+        android:text="@string/ResourceLoginPopUpMessage"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -38,7 +38,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:onClick="CancelButton"
-            android:text="Cancel" />
+            android:text="@android:string/cancel" />
 
         <Button
             android:id="@+id/button5"
@@ -50,7 +50,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:onClick="goRegisterButton"
-            android:text="Register" />
+            android:text="@string/ResourceMainRegister" />
 
         <Button
             android:id="@+id/button10"
@@ -62,7 +62,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:onClick="goLoginButton"
-            android:text="Login" />
+            android:text="@string/ResourceLoginLogin" />
     </LinearLayout>
 
 </LinearLayout>

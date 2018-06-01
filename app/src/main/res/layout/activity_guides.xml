@@ -21,10 +21,10 @@
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Search guides"
+            android:hint="@string/ResourceGuideSearchGuide"
             android:inputType="textFilter"
             android:textColor="?attr/colorBackgroundFloating"
-            android:textColorHint="#ffffff"/>
+            android:textColorHint="#ffffff" />
 
         <ImageButton
             android:id="@+id/imageButton"
