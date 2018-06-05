@@ -45,4 +45,14 @@
     <string name="ResourceSettingsSystem">System</string>
     <string name="ResourceSettingsNotifications">Show notifications</string>
     <string name="ResourceSettingsNotificationsDescription">Choose either you want the app to show push\\notifications or not</string>
+    <string name="country_prompt">Choose a lenguage</string>
+
+    <string-array name="country_arrays">
+        <item>English</item>
+        <item>Catalan</item>
+        <item>Spanish</item>
+        <item>French</item>
+        <item>Italian</item>
+    </string-array>
+
 </resources>
