@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -11,7 +12,6 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 
 
 public class PopUpLanguageActivity extends AppCompatActivity {
@@ -34,33 +34,36 @@ public class PopUpLanguageActivity extends AppCompatActivity {
 
         RadioGroup rg = findViewById(R.id.LanguageGroup);
         if (rg.getCheckedRadioButtonId() == R.id.radioButton3) {
-            setLocale("eng");
+            setLocale("en","UK");
             Toast t = Toast.makeText(getApplicationContext(), "Language set to English", Toast.LENGTH_SHORT);
             t.show();
         }
         else if (rg.getCheckedRadioButtonId() == R.id.radioButton2) {
-            setLocale("cat");
+            setLocale("ca","CA");
             Toast t = Toast.makeText(getApplicationContext(), "Idioma canviat al Català", Toast.LENGTH_SHORT);
             t.show();
         }
         else if (rg.getCheckedRadioButtonId() == R.id.radioButton) {
-            setLocale("spa");
+            setLocale("es","ES");
             Toast t = Toast.makeText(getApplicationContext(), "Idioma cambiado al Español", Toast.LENGTH_SHORT);
             t.show();
         }
-        super.recreate();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
+        startActivity(intent);
     }
 
-    private void setLocale(String lang) {
-        Locale locale = new Locale(lang);
+    private void setLocale(String lang,String zone) {
+
+        Locale locale = new Locale(lang,zone);
         Locale.setDefault(locale);
+
         Configuration config = getBaseContext().getResources().getConfiguration();
         config.locale = locale;
+
         getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+            getBaseContext().getResources().getDisplayMetrics());
     }
 
 }

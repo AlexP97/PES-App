@@ -12,4 +12,6 @@
     <string name="ResourceChatSend">Envia</string>
     <string name="ResourceChatTypeMessage">Escriu un missatge</string>
     <string name="ResourceProfileNewPassword">Contrasenya nova</string>
+    <string name="ResourceMainRegister">REGISTRE</string>
+    <string name="ResourceMainGuestLogin">Entra com a convidat</string>
 </resources>
