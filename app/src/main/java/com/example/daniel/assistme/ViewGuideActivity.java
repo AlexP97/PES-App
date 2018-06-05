@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.webkit.WebView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import org.json.JSONObject;
 import android.util.Log;
@@ -26,6 +27,9 @@ public class ViewGuideActivity extends AppCompatActivity {
     android.content.Context context;
     String guideTitle, guidePoints;
     public static String guideContent;
+    private Spinner spinner1;
+    private static String leng_to;
+    private static String leng_from = "en";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,9 @@ public class ViewGuideActivity extends AppCompatActivity {
             View b = findViewById(R.id.mapbutton);
             b.setVisibility(View.GONE);
         }
+
+        // Listener a la lista de Idiomas
+        addListenerOnSpinnerItemSelection();
     }
 
     public void MapButton(android.view.View view) {
@@ -86,7 +93,7 @@ public class ViewGuideActivity extends AppCompatActivity {
                 String destinationLang = "es";
                 //URL url = new URL("https://translate.yandex.net/api/v1.5/tr.json/translate?lang=en-ru&key=trnsl.1.1.20180601T105748Z.dc0633591153717a.53d870f1d138ff601a4850c3894c477aa44c814f");
                 String yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + mKey
-                        + "&text=" + sourceText + "&lang=" + sourceLang + "-" + destinationLang;
+                        + "&text=" + sourceText + "&lang=" + leng_from + "-" + leng_to;
                 URL url = new URL(yandexUrl);
                 // Send POST data request
 
@@ -145,5 +152,26 @@ public class ViewGuideActivity extends AppCompatActivity {
             catch(Exception e){}
         }
 
+    }
+
+    public void addListenerOnSpinnerItemSelection() {
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+    }
+
+    public static String getLen_to(){
+        return leng_to;
+    }
+
+    public static void setLen_to(String value){
+        leng_to = value;
+    }
+
+    public static String getLen_from(){
+        return leng_from;
+    }
+
+    public static void setLen_from(String value){
+        leng_from = value;
     }
 }

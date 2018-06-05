@@ -41,4 +41,13 @@
     <string name="ResourceSettingsSystem">Sistema</string>
     <string name="ResourceSettingsNotifications">Muestra notificaciones</string>
     <string name="ResourceSettingsNotificationsDescription">Elige si quieres que la aplicación muestre notificaciones en tu dispositivo o no</string>
+    <string name="country_prompt">Selecciona un idioma</string>
+
+    <string-array name="country_arrays">
+        <item>English</item>
+        <item>Catalan</item>
+        <item>Spanish</item>
+        <item>French</item>
+        <item>Italian</item>
+    </string-array>
 </resources>

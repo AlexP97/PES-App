@@ -12,4 +12,14 @@
     <string name="ResourceChatSend">Envia</string>
     <string name="ResourceChatTypeMessage">Escriu un missatge</string>
     <string name="ResourceProfileNewPassword">Contrasenya nova</string>
+    <string name="country_prompt">Selecciona un idioma</string>
+
+    <string-array name="country_arrays">
+        <item>English</item>
+        <item>Catalan</item>
+        <item>Spanish</item>
+        <item>French</item>
+        <item>Italian</item>
+    </string-array>
+
 </resources>
