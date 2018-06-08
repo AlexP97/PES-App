@@ -44,7 +44,7 @@
                     android:background="#00ffffff"
                     android:onClick="ForumButton"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/foro" />
+                    app:srcCompat="@drawable/info_icono" />
 
             </LinearLayout>
 
