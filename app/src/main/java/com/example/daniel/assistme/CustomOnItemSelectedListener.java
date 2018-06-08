@@ -28,7 +28,7 @@ public class CustomOnItemSelectedListener implements OnItemSelectedListener {
             default:
                 break;
         }
-        
+
     }
 
     @Override

@@ -34,6 +34,16 @@
                 android:onClick="translate"
                 android:text="Traducir" />
 
+            <ImageButton
+                android:id="@+id/button9"
+                android:layout_width="15dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:onClick="reset_traduction"
+                android:scaleType="fitXY"
+                android:src="@drawable/undo_small"
+                android:textSize="14sp" />
+
         </LinearLayout>
 
         <TextView

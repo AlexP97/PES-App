@@ -182,5 +182,9 @@ public class ViewGuideActivity extends AppCompatActivity {
         leng_from = value;
     }
 
+    public void reset_traduction(android.view.View view){
+        WebView contentHtmlView = (WebView) findViewById(R.id.content_html);
+        contentHtmlView.loadData(guideContent, "text/html; charset=utf-8", "utf-8");
+    }
 
 }
