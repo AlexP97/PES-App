@@ -28,10 +28,7 @@ public class CustomOnItemSelectedListener implements OnItemSelectedListener {
             default:
                 break;
         }
-
-        Toast.makeText(parent.getContext(),
-                "OnItemSelectedListener : " + ViewGuideActivity.getLen_to(),
-                Toast.LENGTH_SHORT).show();
+        
     }
 
     @Override

@@ -29,7 +29,7 @@ public class ViewGuideActivity extends AppCompatActivity {
     public static String guideContent;
     private Spinner spinner1;
     private static String leng_to;
-    private static String leng_from = "en";
+    private static String leng_from = "es";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +70,15 @@ public class ViewGuideActivity extends AppCompatActivity {
     }
 
     public void translate(android.view.View view) throws UnsupportedEncodingException {
-        Toast t = Toast.makeText(getApplicationContext(), "Translate!!", Toast.LENGTH_SHORT);
-        t.show();
+
+
+        String html = guideContent;
+        String txt = org.jsoup.Jsoup.parse(html).text();
 
 
         //Poner la peticion http aqui
         ViewGuideActivity.AsyncTrans asyncTrans = new ViewGuideActivity.AsyncTrans();
-        asyncTrans.execute("");
+        asyncTrans.execute(txt);
     }
 
     private class AsyncTrans extends AsyncTask<String, Void, String> {
@@ -88,9 +90,8 @@ public class ViewGuideActivity extends AppCompatActivity {
 
             try {
                 String mKey = "trnsl.1.1.20180601T105748Z.dc0633591153717a.53d870f1d138ff601a4850c3894c477aa44c814f";
-                String sourceText = "My name is Elias";
-                String sourceLang = "en";
-                String destinationLang = "es";
+                String sourceText = data[0];
+
                 //URL url = new URL("https://translate.yandex.net/api/v1.5/tr.json/translate?lang=en-ru&key=trnsl.1.1.20180601T105748Z.dc0633591153717a.53d870f1d138ff601a4850c3894c477aa44c814f");
                 String yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + mKey
                         + "&text=" + sourceText + "&lang=" + leng_from + "-" + leng_to;
@@ -99,12 +100,7 @@ public class ViewGuideActivity extends AppCompatActivity {
 
                 URLConnection conn = url.openConnection();
                 conn.setDoOutput(true);
-                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                String d = "";
-                for (int i = 0; i < data.length; ++i) d += data[i];
-                wr.write( d );
-                wr.flush();
-                Log.e("data", d);
+
 
                 // Get the server response
 
@@ -121,6 +117,7 @@ public class ViewGuideActivity extends AppCompatActivity {
 
                 String jsonString = sb.toString();
                 Log.e("result-translate", jsonString);
+
                 return jsonString;
             }
             catch(Exception ex) {
@@ -143,9 +140,19 @@ public class ViewGuideActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             try {
-                Toast t = null;
-                t = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT);
-                t.show();
+
+                JSONObject jsonObject = new JSONObject(result);
+
+                WebView contentHtmlView = (WebView) findViewById(R.id.content_html);
+                String txt = jsonObject.getString("text");
+
+                StringBuilder sb = new StringBuilder(txt);
+                sb.deleteCharAt(0);
+                sb.deleteCharAt(0);
+                sb.setLength(sb.length() - 2);
+                txt = sb.toString();
+
+                contentHtmlView.loadData(txt, "text/html; charset=utf-8", "utf-8");
 
                 super.onPostExecute(result);
             }
@@ -174,4 +181,6 @@ public class ViewGuideActivity extends AppCompatActivity {
     public static void setLen_from(String value){
         leng_from = value;
     }
+
+
 }
