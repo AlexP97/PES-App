@@ -33,7 +33,10 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
+
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
+import android.view.KeyEvent;
 
 public class GuidesActivity extends AppCompatActivity {
 
@@ -67,6 +70,23 @@ public class GuidesActivity extends AppCompatActivity {
             }
         });
 
+        final EditText edittext = (EditText) findViewById(R.id.search);
+        edittext.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    EditText searchEdit = (EditText) findViewById(R.id.search);
+                    String search = searchEdit.getText().toString();
+
+                    searchGuides(search);
+                    return true;
+                }
+                return false;
+            }
+        });
+
         getGuides(extras.getString("guides"));
     }
 
@@ -94,11 +114,9 @@ public class GuidesActivity extends AppCompatActivity {
     }
 
     public void SearchGuidesButton (View view) {
-
-        EditText searchEdit = (EditText) findViewById(R.id.search);
-        String search = searchEdit.getText().toString();
-
-        searchGuides(search);
+        View b = findViewById(R.id.search);
+        if (b.getVisibility() == View.GONE) b.setVisibility(View.VISIBLE);
+        else b.setVisibility(View.GONE);
     }
 
     private void searchGuides (final String search) {
