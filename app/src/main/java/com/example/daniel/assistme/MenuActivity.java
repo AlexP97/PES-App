@@ -71,8 +71,14 @@ public class MenuActivity extends AppCompatActivity {
 
     public void ChatButton(View view) {
         if (checkSession()) {
-            Intent intent = new Intent(context, ChatActivity.class);
-            startActivity(intent);
+            if (MainActivity.getUser().getUsertype().equals("normal")) {
+                Intent intent = new Intent(context, SolicitudChatActivity.class);
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(context, RequestListActivity.class);
+                startActivity(intent);
+            }
         } else {
             Intent intent = new Intent(this, PopUpLoginActivity.class);
             startActivity(intent);
