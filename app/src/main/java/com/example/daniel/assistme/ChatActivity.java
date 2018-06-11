@@ -47,6 +47,9 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        String id = getIntent().getStringExtra("Chat_ID");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
@@ -60,7 +63,7 @@ public class ChatActivity extends AppCompatActivity {
         userName.setText(MainActivity.sharedPreferences.getString("Username", null));
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("chat");
+        databaseReference = database.getReference("chat").child(id);
         storage = FirebaseStorage.getInstance();
 
         messageAdapter = new MessageAdapter(this);

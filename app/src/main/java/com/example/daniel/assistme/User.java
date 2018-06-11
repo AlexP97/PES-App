@@ -77,5 +77,13 @@ public class User implements Serializable {
     public void setUrl_picture(String url_picture) {
         this.url_picture = url_picture;
     }
+
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
+    }
 }
 
