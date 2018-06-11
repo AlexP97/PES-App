@@ -24,8 +24,8 @@
             android:ems="10"
             android:hint="@string/ResourceGuideSearchGuide"
             android:inputType="textFilter"
-            android:textColor="?attr/colorBackgroundFloating"
-            android:textColorHint="#ffffff"
+            android:textColor="@color/cardview_light_background"
+            android:textColorHint="@color/cardview_light_background"
             android:visibility="gone" />
 
         <ImageButton

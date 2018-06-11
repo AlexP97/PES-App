@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -21,12 +24,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.*;
 
 public class RegisterActivity extends AppCompatActivity {
 
     User userData;
     Context context;
     String errorT = "";
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter;
+    String country = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,25 @@ public class RegisterActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        spinner = (Spinner)findViewById(R.id.spinner);
+        adapter = ArrayAdapter.createFromResource(this, R.array.country_names, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position > 0 ) country = (String)parent.getItemAtPosition(position);
+                else country = "";
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     public void RegisterButton(View view) throws IOException, JSONException {
@@ -56,9 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         EditText passRepEdit = (EditText) findViewById(R.id.repeatPassword);
         String passRep = passRepEdit.getText().toString();
-
-        EditText countryEdit = (EditText) findViewById(R.id.country);
-        String country = countryEdit.getText().toString();
 
         if (username.equals("") || name.equals("") || surname.equals("") || email.equals("") ||
                 pass.equals("") || passRep.equals("") || country.equals("")){
