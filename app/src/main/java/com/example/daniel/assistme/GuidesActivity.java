@@ -3,48 +3,35 @@ package com.example.daniel.assistme;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.JsonReader;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-
-import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
-import android.view.KeyEvent;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
 
 public class GuidesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -255,9 +242,9 @@ public class GuidesActivity extends AppCompatActivity implements AdapterView.OnI
         params.put("apiKey", apiKey);
         params.put("value", value);
 
-
+/*
         // Call the API convert to a PDF
-        InputStreamReader request = new InputStreamReader(Request.Method.Post, apiURL, new Response.Listener<byte[]>() {
+        InputStreamReader request = new InputStreamReader(Request.Method.POST, apiURL, new Response.Listener<byte[]>() {
             @Override
             public void onResponse(byte[] response) {
                 try {
@@ -279,7 +266,7 @@ public class GuidesActivity extends AppCompatActivity implements AdapterView.OnI
                     Toast.makeText(getBaseContext(), "Error while generating PDF file!!", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
     }
 
     public class GuideTitleComparator implements Comparator<Guide>

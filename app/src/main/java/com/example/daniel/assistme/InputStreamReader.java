@@ -2,8 +2,9 @@ package com.example.daniel.assistme;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
+import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.google.android.gms.common.api.Response;
+//import com.google.android.gms.common.api.Response;
 
 import java.util.HashMap;
 import java.util.Map;

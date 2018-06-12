@@ -45,7 +45,7 @@ dependencies {
     //Recortar Imagen Descargar Imagen
     implementation files('libs/jsoup-1.11.3.jar')
     //libreria volley para https
-    compile 'com.android.volley:volley:1.1.0'
+    implementation 'com.android.volley:volley:1.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
