@@ -92,9 +92,10 @@ public class ViewGuideActivity extends AppCompatActivity {
                 //URL url = new URL("https://translate.yandex.net/api/v1.5/tr.json/translate?lang=en-ru&key=trnsl.1.1.20180601T105748Z.dc0633591153717a.53d870f1d138ff601a4850c3894c477aa44c814f");
                 //String yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + mKey
                         //+ "&text=" + sourceText + "&lang=" + leng_from + "-" + leng_to;
+                String encodedText = java.net.URLEncoder.encode(sourceText,"UTF-8");
                 String yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + mKey +
-                        "&lang=" + leng_from + "-" + leng_to + "&text=" + sourceText;
-                Log.d("yandexURL: ", yandexUrl);
+                        "&lang=" + leng_from + "-" + leng_to + "&text=" + encodedText;
+
                 URL url = new URL(yandexUrl);
                 // Send POST data request
 
