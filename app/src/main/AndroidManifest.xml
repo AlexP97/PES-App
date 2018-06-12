@@ -58,6 +58,10 @@
             android:label="Log in"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".HelpActivity"
+            android:label="Help"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".RegisterActivity"
             android:label="Sign up"
             android:screenOrientation="portrait" />
