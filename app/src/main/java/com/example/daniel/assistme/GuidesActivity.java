@@ -3,6 +3,7 @@ package com.example.daniel.assistme;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.JsonReader;
@@ -21,9 +22,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -33,12 +37,16 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.view.KeyEvent;
 
-public class GuidesActivity extends AppCompatActivity {
+import com.android.volley.Request;
+import com.android.volley.Response;
+
+public class GuidesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     Context context;
     Guide g;
@@ -233,6 +241,45 @@ public class GuidesActivity extends AppCompatActivity {
             overridePendingTransition(0,0); //0 for no animation
             //startActivity(intent);
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        //solo hay un boton donde pulsar, así que no hace falta diferenciar (por ahora)
+
+        // a url starting with http or an HTML string
+        String value = "probando, probando...";
+        String apiKey = "f13be606-38c6-4aaf-8715-5fedd22cb30d";
+        String apiURL = "http://api.html2pdfrocket.com/pdf";
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("apiKey", apiKey);
+        params.put("value", value);
+
+
+        // Call the API convert to a PDF
+        InputStreamReader request = new InputStreamReader(Request.Method.Post, apiURL, new Response.Listener<byte[]>() {
+            @Override
+            public void onResponse(byte[] response) {
+                try {
+                    if (response != null) {
+                        File localFolder = new File(Environment.getExternalStorageDirectory(), "AssistMe Guides");
+                        if (!localFolder.exists()) {
+                            localFolder.mkdirs();
+                        }
+
+                        // Write stream output to local file
+                        File pdfFile = new File(localFolder, "textoDePrueba.pdf");
+                        OutputStream opStream = new FileOutputStream(pdfFile);
+                        pdfFile.setWritable(true);
+                        opStream.write(response);
+                        opStream.flush();
+                        opStream.close();
+                    }
+                } catch (Exception ex) {
+                    Toast.makeText(getBaseContext(), "Error while generating PDF file!!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     public class GuideTitleComparator implements Comparator<Guide>
