@@ -1,25 +1,21 @@
 package com.example.daniel.assistme;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import org.json.JSONObject;
-import android.util.Log;
-import android.widget.Button;
-import android.view.View;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 
 
 public class ViewGuideActivity extends AppCompatActivity {
@@ -39,6 +35,7 @@ public class ViewGuideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_guide);
 
         Bundle extras = getIntent().getExtras();
+        leng_to = "en";
         guideTitle = extras.getString("titleGuide");
         guidePoints = extras.getString("pointsGuide");
 
@@ -93,8 +90,11 @@ public class ViewGuideActivity extends AppCompatActivity {
                 String sourceText = data[0];
 
                 //URL url = new URL("https://translate.yandex.net/api/v1.5/tr.json/translate?lang=en-ru&key=trnsl.1.1.20180601T105748Z.dc0633591153717a.53d870f1d138ff601a4850c3894c477aa44c814f");
-                String yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + mKey
-                        + "&text=" + sourceText + "&lang=" + leng_from + "-" + leng_to;
+                //String yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + mKey
+                        //+ "&text=" + sourceText + "&lang=" + leng_from + "-" + leng_to;
+                String yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + mKey +
+                        "&lang=" + leng_from + "-" + leng_to + "&text=" + sourceText;
+                Log.d("yandexURL: ", yandexUrl);
                 URL url = new URL(yandexUrl);
                 // Send POST data request
 
@@ -116,12 +116,11 @@ public class ViewGuideActivity extends AppCompatActivity {
                 }
 
                 String jsonString = sb.toString();
-                Log.e("result-translate", jsonString);
 
                 return jsonString;
             }
             catch(Exception ex) {
-
+                ex.printStackTrace();
             }
             finally
             {
