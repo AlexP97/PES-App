@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class EditActivity extends AppCompatActivity {
 
     User userData;
+    User userData_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +138,8 @@ public class EditActivity extends AppCompatActivity {
                     data += "&" + URLEncoder.encode("current_password", "UTF-8") + "="
                             + URLEncoder.encode(current_password, "UTF-8");
 
+                    userData_back = new User(userData.getUsername(), email, name, surname, country, "admin", current_password, userData.getUrl_picture());
+
                     //Poner la peticion http aqui
                     AsyncEdit asyncEdit = new AsyncEdit();
                     asyncEdit.execute(data);
@@ -210,10 +213,14 @@ public class EditActivity extends AppCompatActivity {
             if (result == null)
                 t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
             else if (result.contains("true")) {
+                Log.d("data-edit-dedede", result);
                 t = Toast.makeText(getApplicationContext(), "Edition successful", Toast.LENGTH_SHORT);
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("userData", userData);
+                //userData = userData_back;
+                //bundle.putSerializable("userData", userData_back);
+                MainActivity.setSharedPreferences(userData_back);
+                bundle.putSerializable("userData", userData_back);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
