@@ -25,8 +25,12 @@ public class SolicitudChatActivity extends AppCompatActivity {
 
     LinearLayout cancelRequest, sendRequest;
 
+    boolean active;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        active = true;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitud_chat);
@@ -43,7 +47,8 @@ public class SolicitudChatActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 i++;
-                if (i > 1) {
+                if (i > 1 && active) {
+                    active = false;
                     sendRequest.setVisibility(View.GONE);
                     cancelRequest.setVisibility(View.GONE);
                     Intent intent = new Intent(getBaseContext(), ChatActivity.class);
@@ -75,7 +80,7 @@ public class SolicitudChatActivity extends AppCompatActivity {
 
             }
         });
-        if (i == 0){
+        if (i == 0 && active){
             sendRequest.setVisibility(View.VISIBLE);
             cancelRequest.setVisibility(View.GONE);
         }

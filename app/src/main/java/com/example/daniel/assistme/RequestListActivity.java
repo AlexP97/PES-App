@@ -110,18 +110,21 @@ public class RequestListActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot requestSnapshot: dataSnapshot.getChildren()) {
 
-                            active = false;
+                            if (active) {
 
-                            requestSnapshot.getRef().removeValue();
+                                active = false;
 
-                            Message m = new Message(requests.get(position).getUserName(), MainActivity.sharedPreferences.getString("Username", null), "", "", "1");
+                                requestSnapshot.getRef().removeValue();
 
-                            databaseReference2.push().setValue(m);
+                                Message m = new Message(requests.get(position).getUserName(), MainActivity.sharedPreferences.getString("Username", null), "", "", "1");
 
-                            Intent intent = new Intent(getBaseContext(), ChatActivity.class);
-                            intent.putExtra("Chat_ID", requests.get(position).getUserName());
-                            startActivity(intent);
-                            finish();
+                                databaseReference2.push().setValue(m);
+
+                                Intent intent = new Intent(getBaseContext(), ChatActivity.class);
+                                intent.putExtra("Chat_ID", requests.get(position).getUserName());
+                                startActivity(intent);
+                                finish();
+                            }
                         }
                     }
 
