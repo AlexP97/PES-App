@@ -43,6 +43,8 @@
     <string name="ResourceSettingsNotificationsDescription">Elige si quieres que la aplicación muestre notificaciones en tu dispositivo o no</string>
     <string name="country_prompt">Selecciona un idioma</string>
 
+    <string name="download">Descargar</string>
+
     <string-array name="country_arrays">
         <item>English</item>
         <item>Catalan</item>

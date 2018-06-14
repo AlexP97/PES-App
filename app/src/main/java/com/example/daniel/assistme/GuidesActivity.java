@@ -33,7 +33,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class GuidesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class GuidesActivity extends AppCompatActivity {
 
     Context context;
     Guide g;
@@ -228,45 +228,6 @@ public class GuidesActivity extends AppCompatActivity implements AdapterView.OnI
             overridePendingTransition(0,0); //0 for no animation
             //startActivity(intent);
         }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        //solo hay un boton donde pulsar, así que no hace falta diferenciar (por ahora)
-
-        // a url starting with http or an HTML string
-        String value = "probando, probando...";
-        String apiKey = "f13be606-38c6-4aaf-8715-5fedd22cb30d";
-        String apiURL = "http://api.html2pdfrocket.com/pdf";
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("apiKey", apiKey);
-        params.put("value", value);
-
-/*
-        // Call the API convert to a PDF
-        InputStreamReader request = new InputStreamReader(Request.Method.POST, apiURL, new Response.Listener<byte[]>() {
-            @Override
-            public void onResponse(byte[] response) {
-                try {
-                    if (response != null) {
-                        File localFolder = new File(Environment.getExternalStorageDirectory(), "AssistMe Guides");
-                        if (!localFolder.exists()) {
-                            localFolder.mkdirs();
-                        }
-
-                        // Write stream output to local file
-                        File pdfFile = new File(localFolder, "textoDePrueba.pdf");
-                        OutputStream opStream = new FileOutputStream(pdfFile);
-                        pdfFile.setWritable(true);
-                        opStream.write(response);
-                        opStream.flush();
-                        opStream.close();
-                    }
-                } catch (Exception ex) {
-                    Toast.makeText(getBaseContext(), "Error while generating PDF file!!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
     }
 
     public class GuideTitleComparator implements Comparator<Guide>

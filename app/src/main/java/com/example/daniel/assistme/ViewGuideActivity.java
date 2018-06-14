@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Spinner;
@@ -16,6 +18,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 
 
 public class ViewGuideActivity extends AppCompatActivity {
@@ -185,6 +188,62 @@ public class ViewGuideActivity extends AppCompatActivity {
     public void reset_traduction(android.view.View view){
         WebView contentHtmlView = (WebView) findViewById(R.id.content_html);
         contentHtmlView.loadData(guideContent, "text/html; charset=utf-8", "utf-8");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_guia, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.descargar_guia) {
+            // lo ideal aquí sería hacer un intent para abrir una nueva clase como lo siguiente
+            Log.i("Descarga Guia", "Downloading...");
+
+/*
+            String value = "probando, probando...";
+            String apiKey = "f13be606-38c6-4aaf-8715-5fedd22cb30d";
+            String apiURL = "http://api.html2pdfrocket.com/pdf";
+            HashMap<String, String> params = new HashMap<String, String>();
+            params.put("apiKey", apiKey);
+            params.put("value", value);
+
+
+        // Call the API convert to a PDF
+        InputStreamReader request = new InputStreamReader(Request.Method.POST, apiURL, new Response.Listener<byte[]>() {
+            @Override
+            public void onResponse(byte[] response) {
+                try {
+                    if (response != null) {
+                        File localFolder = new File(Environment.getExternalStorageDirectory(), "AssistMe Guides");
+                        if (!localFolder.exists()) {
+                            localFolder.mkdirs();
+                        }
+
+                        // Write stream output to local file
+                        File pdfFile = new File(localFolder, "textoDePrueba.pdf");
+                        OutputStream opStream = new FileOutputStream(pdfFile);
+                        pdfFile.setWritable(true);
+                        opStream.write(response);
+                        opStream.flush();
+                        opStream.close();
+                    }
+                } catch (Exception ex) {
+                    Toast.makeText(getBaseContext(), "Error while generating PDF file!!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });*/
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -16,6 +16,8 @@
     <string name="ResourceMainGuestLogin">Entra com a convidat</string>
     <string name="country_prompt">Selecciona un idioma</string>
 
+    <string name="download">Descarregar</string>
+
     <string-array name="country_arrays">
         <item>English</item>
         <item>Catalan</item>
