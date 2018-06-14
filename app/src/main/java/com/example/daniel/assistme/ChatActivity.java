@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,13 +42,18 @@ public class ChatActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference databaseReference;
+    DatabaseReference databaseReference2;
     FirebaseStorage storage;
     StorageReference storageReference;
+
+    String username1, username2, username;
 
     static final int SEND_PHOTO = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        username1 = username2 = "";
 
         String id = getIntent().getStringExtra("Chat_ID");
 
@@ -60,7 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         sendButton = (Button) findViewById(R.id.sendButton);
         sendImageButton = (ImageButton) findViewById(R.id.sendImageButton);
 
-        userName.setText(MainActivity.sharedPreferences.getString("Username", null));
+        username = MainActivity.sharedPreferences.getString("Username", null);
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("chat").child(id);
@@ -85,6 +92,16 @@ public class ChatActivity extends AppCompatActivity {
 
                 Message m = dataSnapshot.getValue(Message.class);
                 messageAdapter.addMessage(m);
+
+                if (username1.equals("")) {
+                    username1 = m.getUserName();
+                    if (!username1.equals(username)) userName.setText(username1);
+                }
+                else if (username2.equals("")) {
+                    username2 = m.getUserName();
+                    if (!username2.equals(username)) userName.setText(username2);
+                }
+
                 setScrollbar();
             }
 
@@ -110,26 +127,39 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+    public void FinishChat (View view) {
+
+        databaseReference2 = database.getReference(username2);
+        databaseReference2.removeValue();
+
+        databaseReference.removeValue();
+
+        finish();
+    }
+
     private void setScrollbar() {
         messageList.scrollToPosition(messageAdapter.getItemCount() - 1);
     }
 
     public void SendMessage(View view){
 
-        Calendar calendar = Calendar.getInstance();
-        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
+        if (!messageText.getText().toString().matches("")) {
 
-        String date;
+            Calendar calendar = Calendar.getInstance();
+            int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = calendar.get(Calendar.MINUTE);
 
-        if (minute >= 10) date = Integer.toString(hourOfDay) + ':' + Integer.toString(minute);
-        else date = Integer.toString(hourOfDay) + ":0" + Integer.toString(minute);
+            String date;
 
-        Message m = new Message(messageText.getText().toString(), userName.getText().toString(), "", date, "1");
+            if (minute >= 10) date = Integer.toString(hourOfDay) + ':' + Integer.toString(minute);
+            else date = Integer.toString(hourOfDay) + ":0" + Integer.toString(minute);
 
-        databaseReference.push().setValue(m);
+            Message m = new Message(messageText.getText().toString(), username, "", date, "1");
 
-        messageText.setText("");
+            databaseReference.push().setValue(m);
+
+            messageText.setText("");
+        }
     }
 
     public void SendPicture(View view) {
@@ -164,7 +194,7 @@ public class ChatActivity extends AppCompatActivity {
                     if (minute >= 10) date = Integer.toString(hourOfDay) + ':' + Integer.toString(minute);
                     else date = Integer.toString(hourOfDay) + ":0" + Integer.toString(minute);
 
-                    Message m = new Message("", u.toString(), userName.getText().toString(), "", date, "2");
+                    Message m = new Message("", u.toString(), username, "", date, "2");
                     databaseReference.push().setValue(m);
 
                     setScrollbar();

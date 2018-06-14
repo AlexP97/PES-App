@@ -20,12 +20,17 @@ public class RequestListActivity extends AppCompatActivity {
 
     ArrayList<Message> requests = new ArrayList<>();
 
+    boolean active;
+
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     DatabaseReference databaseReference2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        active = true;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_list);
 
@@ -45,12 +50,17 @@ public class RequestListActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot requestSnapshot: dataSnapshot.getChildren()) {
 
-                    Message m = requestSnapshot.getValue(Message.class);
+                    if (active) {
 
-                    Intent intent = new Intent(getBaseContext(), ChatActivity.class);
-                    intent.putExtra("Chat_ID", m.getMessageBody());
-                    startActivity(intent);
-                    finish();
+                        active = false;
+
+                        Message m = requestSnapshot.getValue(Message.class);
+
+                        Intent intent = new Intent(getBaseContext(), ChatActivity.class);
+                        intent.putExtra("Chat_ID", m.getMessageBody());
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
 
@@ -99,6 +109,8 @@ public class RequestListActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot requestSnapshot: dataSnapshot.getChildren()) {
+
+                            active = false;
 
                             requestSnapshot.getRef().removeValue();
 
