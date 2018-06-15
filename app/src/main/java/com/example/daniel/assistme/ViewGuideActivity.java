@@ -2,6 +2,7 @@ package com.example.daniel.assistme;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -14,7 +15,12 @@ import android.widget.TextView;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -197,53 +203,25 @@ public class ViewGuideActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.descargar_guia) {
-            // lo ideal aquí sería hacer un intent para abrir una nueva clase como lo siguiente
-            Log.i("Descarga Guia", "Downloading...");
-
-/*
-            String value = "probando, probando...";
-            String apiKey = "f13be606-38c6-4aaf-8715-5fedd22cb30d";
-            String apiURL = "http://api.html2pdfrocket.com/pdf";
-            HashMap<String, String> params = new HashMap<String, String>();
-            params.put("apiKey", apiKey);
-            params.put("value", value);
-
-
-        // Call the API convert to a PDF
-        InputStreamReader request = new InputStreamReader(Request.Method.POST, apiURL, new Response.Listener<byte[]>() {
-            @Override
-            public void onResponse(byte[] response) {
-                try {
-                    if (response != null) {
-                        File localFolder = new File(Environment.getExternalStorageDirectory(), "AssistMe Guides");
-                        if (!localFolder.exists()) {
-                            localFolder.mkdirs();
-                        }
-
-                        // Write stream output to local file
-                        File pdfFile = new File(localFolder, "textoDePrueba.pdf");
-                        OutputStream opStream = new FileOutputStream(pdfFile);
-                        pdfFile.setWritable(true);
-                        opStream.write(response);
-                        opStream.flush();
-                        opStream.close();
-                    }
-                } catch (Exception ex) {
-                    Toast.makeText(getBaseContext(), "Error while generating PDF file!!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
-
-            return true;
+    public void download(android.view.View view) {
+        File localFolder = new File(Environment.getExternalStorageDirectory() + "/AssistMeGuides/");
+        if (!localFolder.exists()){
+            localFolder.mkdirs();
         }
-
-        return super.onOptionsItemSelected(item);
+        File pdfFile = new File(localFolder, guideTitle + ".pdf");
+        try {
+            pdfFile.createNewFile();
+            OutputStream opStream = new FileOutputStream(pdfFile);
+            pdfFile.setWritable(true);
+            byte[] b = guideContent.getBytes();
+            opStream.write(b);
+            opStream.flush();
+            opStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
