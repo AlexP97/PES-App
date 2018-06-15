@@ -47,6 +47,8 @@
     <string name="ResourceSettingsNotificationsDescription">Choose either you want the app to show push\\notifications or not</string>
     <string name="country_prompt">Choose a lenguage</string>
 
+    <string name="download">Download</string>
+
     <string-array name="country_arrays">
         <item>English</item>
         <item>Catalan</item>
