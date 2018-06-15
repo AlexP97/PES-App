@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AssistMe</string>
-    <string name="prompt_email">Correu</string>
+    <string name="action_settings">Configuració</string>
+    <string name="title_activity_login">Iniciar Sessió</string>
+    <string name="prompt_email">Correu electrònic</string>
     <string name="ResourceLoginUsername">Nom d\'usuari</string>
     <string name="ResourceLoginPassword">Contrasenya</string>
     <string name="ResourceLoginLogin">iniciar sessió</string>
@@ -18,12 +20,54 @@
 
     <string name="download">Descarregar</string>
 
+    <string name="title_activity_register">registre</string>
+    <string name="guide">GUIES</string>
+    <string name="news">NOTICIES</string>
+    <string name="chat">XAT</string>
+    <string name="info">INFO</string>
+    <string name="ResourceGuideSearchGuide">Buscar guies</string>
+    <string name="ResourceProfileCurrentPassword">Contrasenya actual</string>
+    <string name="ResourceProfileRepeatNewPassword">Repeteix la nova contrasenya</string>
+    <string name="ResourceProfileEditProfile">Editar perfil</string>
+    <string name="ResourceProfileChangePassword">Canviar contrasenya</string>
+    <string name="ResourceLoginPopUpMessage">NECESSITES ESTAR REGISTRAT PER ACCEDIR A AQUESTA FUNCIONALITAT.</string>
+    <string name="ResourceSettingsLanguage">Idioma</string>
+    <string name="ResourceSettingsChangeLanguage">Canvia l\'idioma de la app</string>
+    <string name="ResourceSettingsChangeLnaguageDescription">Canvia l\'idioma del text que es mostra a la pantalla</string>
+    <string name="ResourceSettingsSystem">Sistema</string>
+    <string name="ResourceSettingsNotifications">Mostrar notificacions</string>
+    <string name="ResourceSettingsNotificationsDescription">Escull si vols rebre notificacions o no</string>
+
+    <string name="phone_numbers">NÚMEROS DE TELÈFON</string>
+    <string name="general_emergencies">Emergències Generals</string>
+    <string name="medical_emergencies">Emergències Mèdiques</string>
+    <string name="fire_service">Bombers</string>
+    <string name="saeier">Centre de Servei per a Immigrants, Emmigrants i Refugiats(SAIER)</string>
+    <string name="web_pages">PÀGINES WEB</string>
+    <string name="new_citizens">Portal d\'informació Nous Ciutadans</string>
+    <string name="cear">Comissió Espanyola d\'Ajut als Refugiats (CEAR)</string>
+    <string name="mossos">Mossos d\'Esquadra (Policia catalana)</string>
+    <string name="health">Informació de salut (Informació, tràmits i serveis de la Generalitat de Catalunya)</string>
+
+    <string name="map">MAPA</string>
+    <string name="translate">TRADUIR</string>
+    <string name="go_map">VES AL MAPA</string>
+
+    <string name="send">ENVIAR</string>
+    <string name="send_request">ENVIAR SOL·LICITUD DE XAT</string>
+    <string name="close_chat_message">Estàs segur de que vols finalitzar el xat? Es borrarà la conversació.</string>
+    <string name="yes">SI</string>
+    <string name="no">NO</string>
+    <string name="question_chat">Com et podem ajudar?</string>
+
+    <string name="accept">ACCEPTAR</string>
+    <string name="cancel_request_chat">CANCEL·LAR SOL·LICITUD</string>
+    <string name="chat_open">Ja has enviat una sol·licitud.</string>
+
     <string-array name="country_arrays">
-        <item>English</item>
-        <item>Catalan</item>
-        <item>Spanish</item>
-        <item>French</item>
-        <item>Italian</item>
+        <item>Anglès</item>
+        <item>Català</item>
+        <item>Espanyol</item>
     </string-array>
 
 </resources>

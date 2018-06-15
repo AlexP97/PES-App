@@ -38,7 +38,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/register_button2"
             android:onClick="AbrirPopUp"
-            android:text="SEND CHAT REQUEST"
+            android:text="@string/send_request"
             android:textColor="@color/colorBlack" />
 
     </LinearLayout>
@@ -53,20 +53,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="You have already sent a request"
             android:layout_gravity="center"
+            android:text="@string/chat_open"
             android:textAlignment="center"
-            android:textSize="18dp"/>
+            android:textSize="18dp" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:background="@drawable/register_button2"
-            android:text="CANCEL REQUEST"
-            android:textColor="@color/colorBlack"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:onClick="DeleteRequest"/>
+            android:background="@drawable/register_button2"
+            android:onClick="DeleteRequest"
+            android:text="@string/cancel_request_chat"
+            android:textColor="@color/colorBlack" />
 
     </LinearLayout>
 

@@ -3,8 +3,8 @@
     <string name="app_name">AssistMe</string>
     <string name="action_settings">Configuraciones</string>
     <string name="title_activity_maps">Mapa</string>
-    <string name="title_activity_login">Iniciar sesion</string>
-    <string name="prompt_email">Correo</string>
+    <string name="title_activity_login">Iniciar sesión</string>
+    <string name="prompt_email">Correo electrónico</string>
     <string name="prompt_password">Contraseña (opcional)</string>
     <string name="action_sign_in">Entrar o registrar</string>
     <string name="action_sign_in_short">Entrar</string>
@@ -13,9 +13,10 @@
     <string name="error_incorrect_password">El usuario o la contraseña son incorrectos</string>
     <string name="error_field_required">Este campo es requerido</string>
     <string name="title_activity_register">Registrarse</string>
-    <string name="guide">Guía</string>
-    <string name="news">Noticias</string>
-    <string name="chat">Chat</string>
+    <string name="guide">GUIAS</string>
+    <string name="news">NOTICIAS</string>
+    <string name="chat">CHAT</string>
+    <string name="info">INFO</string>
     <string name="ResourceGuideSearchGuide">Buscar guía</string>
     <string name="ResourceLoginUsername">Nombre de usuario</string>
     <string name="ResourceLoginPassword">Contraseña</string>
@@ -34,7 +35,7 @@
     <string name="ResourceProfileRepeatNewPassword">Repite la nueva contraseña</string>
     <string name="ResourceProfileEditProfile">Editar perfil</string>
     <string name="ResourceProfileChangePassword">Cambiar contraseña</string>
-    <string name="ResourceLoginPopUpMessage">Tienes que estar registrado para acceder a esta característica</string>
+    <string name="ResourceLoginPopUpMessage">Tienes que estar registrado para acceder a esta funcionalidad</string>
     <string name="ResourceSettingsLanguage">Idioma</string>
     <string name="ResourceSettingsChangeLanguage">Cambiar el idioma de la aplicación</string>
     <string name="ResourceSettingsChangeLnaguageDescription">Cambia el idioma del texto mostrado en pantalla</string>
@@ -45,11 +46,35 @@
 
     <string name="download">Descargar</string>
 
+    <string name="phone_numbers">NUMEROS DE TELEFONO</string>
+    <string name="general_emergencies">Emergencias Generales</string>
+    <string name="medical_emergencies">Emergencias Médicas</string>
+    <string name="fire_service">Bomberos</string>
+    <string name="saeier">Centro de Servicios para Immigrantes, Emmigrantes y Refugiados (SAIER)</string>
+    <string name="web_pages">PÁGINAS WEB</string>
+    <string name="new_citizens">Portal de información Nuevos Ciudadanos</string>
+    <string name="cear">Comissión Española de Ayuda a los Refugiados (CEAR)</string>
+    <string name="mossos">Mossos d\'Esquadra (Policía catalana)</string>
+    <string name="health">Información de salut (Información, trámites i servicios de la Generalitat de Catalunya)</string>
+
+    <string name="map">MAPA</string>
+    <string name="translate">TRADUCIR</string>
+    <string name="go_map">IR AL MAPA</string>
+
+    <string name="send">ENVIAR</string>
+    <string name="send_request">ENVIAR SOLICITUD DE CHAT</string>
+    <string name="close_chat_message">Estas seguro de que quieres finalizar el chat? Se borrará la conversación.</string>
+    <string name="yes">SI</string>
+    <string name="no">NO</string>
+    <string name="question_chat">Como te podemos ayudar?</string>
+
+    <string name="accept">ACEPTAR</string>
+    <string name="cancel_request_chat">CANCELAR SOLICITUD</string>
+    <string name="chat_open">Ya has enviado una solicitud.</string>
+
     <string-array name="country_arrays">
-        <item>English</item>
+        <item>Ingles</item>
         <item>Catalan</item>
-        <item>Spanish</item>
-        <item>French</item>
-        <item>Italian</item>
+        <item>Español</item>
     </string-array>
 </resources>

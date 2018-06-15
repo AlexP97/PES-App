@@ -11,7 +11,10 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -55,23 +58,56 @@ public class ViewGuideActivity extends AppCompatActivity {
         WebView contentHtmlView = (WebView) findViewById(R.id.content_html);
         contentHtmlView.loadData(guideContent, "text/html; charset=utf-8", "utf-8");
 
-        if (guidePoints != "-1") {
+        /*
+        if (guidePoints != "[]") {
             View b = findViewById(R.id.mapbutton);
             b.setVisibility(View.VISIBLE);
         }else {
             View b = findViewById(R.id.mapbutton);
             b.setVisibility(View.GONE);
         }
-
+*/
         // Listener a la lista de Idiomas
         addListenerOnSpinnerItemSelection();
     }
 
     public void MapButton(android.view.View view) {
-        if (guidePoints != "EMPTY") {
-            android.content.Intent intent = new android.content.Intent(context, MapsActivity.class);
-            intent.putExtra("points", guidePoints);
-            startActivity(intent);
+        try {
+            JSONArray points = new JSONArray(guidePoints);
+            if (points.length() > 0) {
+                android.content.Intent intent = new android.content.Intent(context, MapsActivity.class);
+                intent.putExtra("points", guidePoints);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "There aren't points of interest in this guide.", Toast.LENGTH_SHORT).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
+            t.show();
+        }
+    }
+
+    public void AppearTranslateButton(android.view.View view) {
+        View b = findViewById(R.id.translation);
+        if (b.getVisibility() == View.GONE) b.setVisibility(View.VISIBLE);
+        else b.setVisibility(View.GONE);
+    }
+
+    public void AppearMapButton(android.view.View view) {
+        try {
+            JSONArray points = new JSONArray(guidePoints);
+            if (points.length() > 0) {
+                View b = findViewById(R.id.mapa_layout);
+                if (b.getVisibility() == View.GONE) b.setVisibility(View.VISIBLE);
+                else b.setVisibility(View.GONE);
+            } else {
+                Toast.makeText(getApplicationContext(), "There aren't points of interest in this guide.", Toast.LENGTH_SHORT).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast t = Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT);
+            t.show();
         }
     }
 

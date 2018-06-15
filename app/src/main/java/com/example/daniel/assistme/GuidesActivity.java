@@ -201,8 +201,7 @@ public class GuidesActivity extends AppCompatActivity {
                     String[] guide = new String[3];
                     if (jsonObject.has("title")) guide[0] = jsonObject.getString("title");
                     if (jsonObject.has("data")) guide[1] = jsonObject.getString("data");
-                    if (jsonObject.has("points") || !jsonObject.isNull("points")) guide[2] = jsonObject.getString("points");
-                    else guide[2] = "-1";
+                    if (jsonObject.has("points")) guide[2] = jsonObject.getString("points");
 
                     ChangeScene("viewGuide", guide);
                 }

@@ -17,9 +17,10 @@
         completions."
     </string>
     <string name="title_activity_register">Sign up</string>
-    <string name="guide">Guide</string>
-    <string name="news">News</string>
-    <string name="chat">Chat</string>
+    <string name="guide">GUIDES</string>
+    <string name="news">NEWS</string>
+    <string name="chat">CHAT</string>
+    <string name="info">INFO</string>
     <string name="ResourceGuideSearchGuide">Search guide</string>
     <string name="ResourceLoginUsername">Username</string>
     <string name="ResourceLoginPassword">Password</string>
@@ -45,9 +46,35 @@
     <string name="ResourceSettingsSystem">System</string>
     <string name="ResourceSettingsNotifications">Show notifications</string>
     <string name="ResourceSettingsNotificationsDescription">Choose either you want the app to show push\\notifications or not</string>
-    <string name="country_prompt">Choose a lenguage</string>
+    <string name="country_prompt">Choose a language</string>
 
     <string name="download">Download</string>
+
+    <string name="phone_numbers">PHONE NUMBERS</string>
+    <string name="general_emergencies">General Emergencies</string>
+    <string name="medical_emergencies">Medical Emergencies</string>
+    <string name="fire_service">Fire Service</string>
+    <string name="saier">Service Centre For Immigrants, Emigrants and Refugees (SAIER)</string>
+    <string name="web_pages">WEB PAGES</string>
+    <string name="new_citizens">New Citizens information portal</string>
+    <string name="cear">Spanish Commission for Refugee Aid (CEAR)</string>
+    <string name="mossos">Mossos d\'Esquadra (Catalan police force)</string>
+    <string name="health">Health Information, procedures and services of the Goverment of Catalonia</string>
+
+    <string name="map">MAP</string>
+    <string name="translate">TRANSLATE</string>
+    <string name="go_map">GO TO MAP</string>
+
+    <string name="send">SEND</string>
+    <string name="send_request">SEND CHAT REQUEST</string>
+    <string name="close_chat_message">Are you sure you want to finish the chat? The conversation will be deleted.</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="question_chat">How can we help you?</string>
+
+    <string name="accept">ACCEPT</string>
+    <string name="cancel_request_chat">CANCEL REQUEST</string>
+    <string name="chat_open">You have already sent a request.</string>
 
     <string-array name="country_arrays">
         <item>English</item>

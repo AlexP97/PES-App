@@ -17,7 +17,7 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="How can we help you?"
+            android:hint="@string/question_chat"
             android:inputType="textMultiLine"
             android:lines="4" />
 
@@ -38,7 +38,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:onClick="cancelRequest"
-            android:text="Cancel" />
+            android:text="@android:string/cancel" />
 
         <Button
             android:id="@+id/button5"
@@ -49,7 +49,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:onClick="publishRequest"
-            android:text="Send" />
+            android:text="@string/ResourceChatSend" />
 
     </LinearLayout>
 </LinearLayout>

@@ -19,7 +19,7 @@
             android:gravity="center_horizontal"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:text="PHONE NUMBERS"
+            android:text="@string/phone_numbers"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="18sp"
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="General Emergencies"
+                    android:text="@string/general_emergencies"
                     android:textColor="?android:attr/colorForeground" />
 
                 <TextView
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Medical Emergencies"
+                    android:text="@string/medical_emergencies"
                     android:textColor="?android:attr/colorForeground" />
 
                 <TextView
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Fire Service"
+                    android:text="@string/fire_service"
                     android:textColor="?android:attr/colorForeground" />
 
                 <TextView
@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Service Centre For Immigrants, Emigrants And Refugees (SAIER)"
+                    android:text="@string/saier"
                     android:textColor="?android:attr/colorForeground" />
 
                 <TextView
@@ -179,7 +179,7 @@
             android:gravity="center_horizontal"
             android:paddingBottom="5dp"
             android:paddingTop="20dp"
-            android:text="WEB PAGES"
+            android:text="@string/web_pages"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="18sp"
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="New Citizens information portal"
+                    android:text="@string/new_citizens"
                     android:textColor="?android:attr/colorForeground" />
 
                 <TextView
@@ -212,7 +212,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Spanish Commission for Refugee Aid (CEAR)"
+                    android:text="@string/cear"
                     android:textColor="?android:attr/colorForeground" />
 
                 <TextView
@@ -221,7 +221,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Mossos d'Esquadra (Catalan police force)"
+                    android:text="@string/mossos"
                     android:textColor="?android:attr/colorForeground" />
 
                 <TextView
@@ -230,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="Health Information, producers and services of the Goverment of Catalonia"
+                    android:text="@string/health"
                     android:textColor="?android:attr/colorForeground" />
 
             </LinearLayout>

@@ -61,7 +61,7 @@
                     android:id="@+id/email_sign_in_button3"
                     style="?android:textAppearanceSmall"
                     android:layout_width="143dp"
-                    android:layout_height="31dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"

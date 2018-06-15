@@ -9,14 +9,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="?attr/colorBackgroundFloating"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/mapbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
+                android:layout_weight="0"
+                android:background="@drawable/register_button2"
+                android:onClick="AppearMapButton"
+                android:text="@string/map"
+                android:textColor="?android:attr/colorForeground"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/mapbutton2"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="0"
+                android:background="@drawable/register_button2"
+                android:onClick="AppearTranslateButton"
+                android:text="@string/translate"
+                android:textColor="?android:attr/colorForeground"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/translation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="0"
+            android:background="?attr/colorBackgroundFloating"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <Spinner
                 android:id="@+id/spinner1"
@@ -32,7 +72,61 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="translate"
-                android:text="Traducir" />
+                android:text="@string/translate" />
+
+            <ImageButton
+                android:id="@+id/button9"
+                android:layout_width="15dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:onClick="reset_traduction"
+                android:scaleType="fitXY"
+                android:src="@drawable/undo_small"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mapa_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="?attr/colorBackgroundFloating"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="MapButton"
+                android:text="@string/go_map" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/translation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="147dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/country_arrays"
+                android:prompt="@string/country_prompt" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="translate"
+                android:text="Translate" />
 
             <ImageButton
                 android:id="@+id/button9"
@@ -64,17 +158,6 @@
             android:onClick="MapButton">
 
         </WebView>
-
-        <Button
-            android:id="@+id/mapbutton"
-            android:layout_width="143dp"
-            android:layout_height="33dp"
-            android:layout_gravity="center"
-            android:background="@drawable/register_button2"
-            android:onClick="MapButton"
-            android:text="Check Map"
-            android:textColor="?android:attr/colorForeground"
-            android:visibility="gone" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
