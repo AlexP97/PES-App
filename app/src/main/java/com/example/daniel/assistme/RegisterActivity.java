@@ -117,7 +117,10 @@ public class RegisterActivity extends AppCompatActivity {
                     data += "&" + URLEncoder.encode("country", "UTF-8") + "="
                             + URLEncoder.encode(country, "UTF-8");
 
-                    userData = new User(username, pass, email, name, surname, country, pass, "");
+                    data += "&" + URLEncoder.encode("url_picture", "UTF-8") + "="
+                            + URLEncoder.encode("https://firebasestorage.googleapis.com/v0/b/assistme-7245f.appspot.com/o/_default%2Fuser_default_picture.png?alt=media&token=2d9b4705-7713-4857-93a7-ff5fc7bd1eb6", "UTF-8");
+
+                    userData = new User(username, pass, email, name, surname, country, pass, "https://firebasestorage.googleapis.com/v0/b/assistme-7245f.appspot.com/o/_default%2Fuser_default_picture.png?alt=media&token=2d9b4705-7713-4857-93a7-ff5fc7bd1eb6");
 
                     //Poner la peticion http aqui
                     AsyncRegister asyncRegister = new AsyncRegister();
