@@ -1,12 +1,14 @@
 package com.example.daniel.assistme;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,11 +17,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SolicitudChatActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     DatabaseReference databaseReference2;
+
+    User userData;
+
+    CircleImageView profileImage;
 
     int i;
 
@@ -29,6 +37,8 @@ public class SolicitudChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        userData = MainActivity.getUser();
 
         active = true;
 
@@ -42,6 +52,14 @@ public class SolicitudChatActivity extends AppCompatActivity {
         cancelRequest = findViewById(R.id.CancelRequest);
         sendRequest = findViewById(R.id.SendRequest);
 
+        profileImage = (CircleImageView) findViewById(R.id.profileImage);
+
+        if (!userData.getUrl_picture().matches("")) {
+            Uri u = Uri.parse(userData.getUrl_picture());
+
+            Glide.with(SolicitudChatActivity.this).load(u).into(profileImage);
+        }
+
         databaseReference2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -53,6 +71,7 @@ public class SolicitudChatActivity extends AppCompatActivity {
                     cancelRequest.setVisibility(View.GONE);
                     Intent intent = new Intent(getBaseContext(), ChatActivity.class);
                     intent.putExtra("Chat_ID", MainActivity.sharedPreferences.getString("Username", null));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 }

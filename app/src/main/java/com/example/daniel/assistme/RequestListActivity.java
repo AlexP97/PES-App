@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.ListView;
+
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import android.view.*;
 import android.widget.Toast;
 
@@ -58,6 +62,7 @@ public class RequestListActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(getBaseContext(), ChatActivity.class);
                         intent.putExtra("Chat_ID", m.getMessageBody());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
                     }
@@ -116,12 +121,22 @@ public class RequestListActivity extends AppCompatActivity {
 
                                 requestSnapshot.getRef().removeValue();
 
-                                Message m = new Message(requests.get(position).getUserName(), MainActivity.sharedPreferences.getString("Username", null), "", "", "1");
+                                Calendar calendar = Calendar.getInstance();
+                                int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+                                int minute = calendar.get(Calendar.MINUTE);
+
+                                String date;
+
+                                if (minute >= 10) date = Integer.toString(hourOfDay) + ':' + Integer.toString(minute);
+                                else date = Integer.toString(hourOfDay) + ":0" + Integer.toString(minute);
+
+                                Message m = new Message(requests.get(position).getUserName(), MainActivity.sharedPreferences.getString("Username", null), MainActivity.getUser().getUrl_picture(), date, "1");
 
                                 databaseReference2.push().setValue(m);
 
                                 Intent intent = new Intent(getBaseContext(), ChatActivity.class);
                                 intent.putExtra("Chat_ID", requests.get(position).getUserName());
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
                             }
@@ -165,10 +180,18 @@ public class RequestListActivity extends AppCompatActivity {
 
             TextView username = view.findViewById(R.id.username);
             TextView messageBody = view.findViewById(R.id.messageBody);
+            CircleImageView profileImage = view.findViewById(R.id.profileImage);
 
             username.setText(requests.get(i).getUserName());
             messageBody.setText(requests.get(i).getMessageBody());
 
+            if (requests.get(i).getUserImage() != null) {
+                if (!requests.get(i).getUserImage().matches("")) {
+                    Uri u = Uri.parse(requests.get(i).getUserImage());
+
+                    Glide.with(RequestListActivity.this).load(u).into(profileImage);
+                }
+            }
             return view;
         }
     }

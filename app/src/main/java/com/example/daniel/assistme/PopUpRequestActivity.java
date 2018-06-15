@@ -54,7 +54,7 @@ public class PopUpRequestActivity extends AppCompatActivity {
         if (minute >= 10) date = Integer.toString(hourOfDay) + ':' + Integer.toString(minute);
         else date = Integer.toString(hourOfDay) + ":0" + Integer.toString(minute);
 
-        Message m = new Message(text.getText().toString(), MainActivity.sharedPreferences.getString("Username", null), "", date, "1");
+        Message m = new Message(text.getText().toString(), MainActivity.sharedPreferences.getString("Username", null), MainActivity.getUser().getUrl_picture(), date, "1");
 
         databaseReference.push().setValue(m);
         databaseReference2.push().setValue(m);

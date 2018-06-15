@@ -11,12 +11,13 @@
     android:layout_marginRight="50dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImage"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_weight="1"
-        android:src="@mipmap/ic_launcher_round"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="100dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_weight="1"
+        android:src="@mipmap/ic_launcher_round" />
 
     <View
         android:layout_width="match_parent"
@@ -33,12 +34,12 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:background="@drawable/register_button2"
-            android:text="CHAT REQUEST"
-            android:textColor="@color/colorBlack"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:onClick="AbrirPopUp"/>
+            android:background="@drawable/register_button2"
+            android:onClick="AbrirPopUp"
+            android:text="SEND CHAT REQUEST"
+            android:textColor="@color/colorBlack" />
 
     </LinearLayout>
 

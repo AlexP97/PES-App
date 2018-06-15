@@ -12,14 +12,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EditActivity">
 
-    <!-- Login progress -->
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/logo_assistme2" />
-
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
@@ -31,27 +23,51 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/ResourceRegisterName"
-                android:imeActionId="6"
-                android:imeActionLabel="Name"
-                android:imeOptions="actionUnspecified"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/surname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/ResourceRegisterSurname"
-                android:imeActionId="6"
-                android:imeActionLabel="Surname"
-                android:imeOptions="actionUnspecified"
-                android:maxLines="1"
-                android:singleLine="true" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/ResourceRegisterName"
+                        android:imeActionId="6"
+                        android:imeActionLabel="Name"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/surname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/ResourceRegisterSurname"
+                        android:imeActionId="6"
+                        android:imeActionLabel="Surname"
+                        android:imeOptions="actionUnspecified"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                </LinearLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:onClick="UploadProfilePicture"
+                    android:src="@mipmap/ic_launcher_round" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/email"

@@ -1,7 +1,9 @@
 package com.example.daniel.assistme;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -95,13 +98,24 @@ public class ChatActivity extends AppCompatActivity {
 
                 if (username1.equals("")) {
                     username1 = m.getUserName();
-                    if (!username1.equals(username)) userName.setText(username1);
+                    if (!username1.equals(username)) {
+                        userName.setText(username1);
+
+                        Uri u = Uri.parse(m.getUserImage());
+
+                        Glide.with(ChatActivity.this).load(u).into(userImage);
+                    }
                 }
                 else if (username2.equals("")) {
                     username2 = m.getUserName();
-                    if (!username2.equals(username)) userName.setText(username2);
-                }
+                    if (!username2.equals(username)) {
+                        userName.setText(username2);
 
+                        Uri u = Uri.parse(m.getUserImage());
+
+                        Glide.with(ChatActivity.this).load(u).into(userImage);
+                    }
+                }
                 setScrollbar();
             }
 
@@ -129,12 +143,32 @@ public class ChatActivity extends AppCompatActivity {
 
     public void FinishChat (View view) {
 
-        databaseReference2 = database.getReference(username2);
-        databaseReference2.removeValue();
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("Are you sure you want to finish the chat? The conversation will be deleted.");
+        alert.setCancelable(false);
 
-        databaseReference.removeValue();
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
-        finish();
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                databaseReference2 = database.getReference(username2);
+                databaseReference2.removeValue();
+
+                databaseReference.removeValue();
+
+                finish();
+            }
+        });
+
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alert.create().show();
     }
 
     private void setScrollbar() {
@@ -154,7 +188,7 @@ public class ChatActivity extends AppCompatActivity {
             if (minute >= 10) date = Integer.toString(hourOfDay) + ':' + Integer.toString(minute);
             else date = Integer.toString(hourOfDay) + ":0" + Integer.toString(minute);
 
-            Message m = new Message(messageText.getText().toString(), username, "", date, "1");
+            Message m = new Message(messageText.getText().toString(), username, MainActivity.getUser().getUrl_picture(), date, "1");
 
             databaseReference.push().setValue(m);
 

@@ -1,6 +1,7 @@
 package com.example.daniel.assistme;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,11 +29,19 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class EditActivity extends AppCompatActivity {
 
     User userData;
     User userData_back;
+
+    FirebaseStorage storage;
+    StorageReference storageReference;
+
+    CircleImageView profileImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +62,17 @@ public class EditActivity extends AppCompatActivity {
 
         EditText countryEdit = findViewById(R.id.country);
         countryEdit.setText(userData.getCountry());
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        profileImage = (CircleImageView) findViewById(R.id.profileImage);
+
+        if (!userData.getUrl_picture().matches("")) {
+            Uri u = Uri.parse(userData.getUrl_picture());
+
+            Glide.with(EditActivity.this).load(u).into(profileImage);
+        }
     }
 
     public void change_password(View view) throws  IOException, JSONException{
@@ -312,5 +338,38 @@ public class EditActivity extends AppCompatActivity {
             super.onPostExecute(result);
         }
     }
+
+    public void UploadProfilePicture(View view) {
+
+        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+        i.setType("image/jpeg");
+        i.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        startActivityForResult(Intent.createChooser(i, "Select a picture"), 2);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+
+            Uri u = data.getData();
+            storageReference = storage.getReference("profile_" + MainActivity.sharedPreferences.getString("Username", null));
+            final StorageReference photoReference = storageReference.child(u.getLastPathSegment());
+            photoReference.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    Uri u = taskSnapshot.getDownloadUrl();
+
+                    Toast.makeText(EditActivity.this, "Profile photo uploaded", Toast.LENGTH_SHORT).show();
+                    Glide.with(EditActivity.this).load(u).into(profileImage);
+
+                    userData.setUrl_picture(u.toString());
+                }
+            });
+        }
+    }
+
 }
 
